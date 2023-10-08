@@ -13,6 +13,13 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
+# define SUCCESS 1
+# define ERROR 0
+# define BUFF_SIZE 4096
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 
 #endif
