@@ -42,16 +42,21 @@ char **lexer(char *input_str) {
             //pipe'ın kendisini de al
             rtn[pipe_count] = ft_substr(input_str, i, 1);
             pipe_count++;
+            //son pipe'ı da güncelle
+            //+1 çünkü substr başlangıç noktaları pipedan sonraki karakterden başlıyor
+            last_pipe = i + 1;
         }
+        //double quote içinde değilsek ve single quote'a denk geldiyse
         else if (input_str[i] == '\'' && !in_double_quotes) 
             in_single_quotes = !in_single_quotes;
-
+        //single quote içinde değilsek ve double quote'a denk geldiyse
         else if (input_str[i] == '"' && !in_single_quotes)
             in_double_quotes = !in_double_quotes;
+        //son karaktere geldiysek
         else if (input_str[i + 1] == '\0')
         {
             //son pipe'tan sona kadar olan kısmı al
-            rtn[pipe_count] = ft_substr(input_str, last_pipe, i - last_pipe + 1);
+            rtn[pipe_count] = ft_substr(input_str, last_pipe, i + 1 - last_pipe);
             pipe_count++;
             //NULL'ı da al
             rtn[pipe_count] = NULL;    
@@ -63,18 +68,17 @@ char **lexer(char *input_str) {
 
 int main(int ac, char **av, char **env){
 
-    if (ac != 1 || av[1] != NULL)
+    if (ac != 1 || av[1] != NULL || env[0] == NULL)
         return (0);
-
-    //print env
-    for(int i = 0; env[i] != NULL; i++){
-        printf("'%s'\n", env[i]);
-    }
 
     //lexer
     char **test = lexer("ls -l | cat -e");
     for(int i = 0; test[i] != NULL; i++){
-        printf("'%s'\n", test[i]);
+        char **splt = ft_split(test[i], ' ');
+        for(int j = 0; splt[j] != NULL; j++){
+            printf("'%s'\n", splt[j]);
+        }
     }
+
     return 0;
 }
