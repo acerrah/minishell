@@ -1,5 +1,19 @@
 #include "minishell.h"
 
+//global data
+typedef struct s_data
+{
+    char **env;
+    char **path;
+    char **cmd;
+    char **args;
+    char **redirections;
+    char **heredocs;
+} t_data;
+
+t_data data;
+
+//lexer that splits the input string into tokens based on pipes and quotes
 char **lexer(char *input_str) {
     
     bool in_single_quotes = false;
@@ -66,12 +80,93 @@ char **lexer(char *input_str) {
     return (rtn);
 }
 
+//handling redirections and heredocs
+void redirections(char **str)
+{
+    int i = 0;
+    int j = 0;
+    int h = 0;
+    int r = 0;
+    while (str[i])
+    {
+        while (str[i][j])
+        {
+            if (str[i][j] == '>' || str[i][j] == '<')
+            {
+                if (str[i][j + 1] == str[i][j])
+                {
+                    //heredoc
+                    if (str[i][j + 2] != '\"' && str[i][j + 2] != '\'')
+                        data.heredocs[h] = ft_split(ft_substr(str[i], j + 2, ft_strlen(str[i]) - j - 2), ' ')[0];
+                    else
+                    {
+                        if (str[i][j + 2] == '\"')
+                            data.heredocs[h] = ft_split(ft_substr(str[i], j + 3, ft_strlen(str[i]) - j - 3), '\"')[0];
+                        else
+                            data.heredocs[h] = ft_split(ft_substr(str[i], j + 3, ft_strlen(str[i]) - j - 3), '\'')[0];
+                    }
+                    h++;
+                }
+                else
+                {
+                    //redirection
+                    if (str[i][j + 1] != '\"' && str[i][j + 1] != '\'')
+                        data.redirections[r] = ft_split(ft_substr(str[i], j + 1, ft_strlen(str[i]) - j - 1), ' ')[0];
+                    else
+                    {
+                        if (str[i][j + 1] == '\"')
+                            data.redirections[r] = ft_split(ft_substr(str[i], j + 2, ft_strlen(str[i]) - j - 2), '\"')[0];
+                        else
+                            data.redirections[r] = ft_split(ft_substr(str[i], j + 2, ft_strlen(str[i]) - j - 2), '\'')[0];
+                    }
+                    r++;
+                }
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+//strdup but for 2d arrays
+char **ft_strdup_2d(char **str)
+{
+    int i = 0;
+    char **rtn;
+
+    while (str[i])
+        i++;
+    rtn = malloc(sizeof(char *) * (i + 1));
+    i = 0;
+    while (str[i])
+    {
+        rtn[i] = ft_strdup(str[i]);
+        i++;
+    }
+    rtn[i] = NULL;
+    return (rtn);
+}
+
+t_data dup_env(char **env)
+{
+    t_data data;
+
+    data.env = ft_strdup_2d(env);
+    data.path = NULL;
+    data.cmd = NULL;
+    data.args = NULL;
+    data.redirections = NULL;
+    data.heredocs = NULL;
+    return (data);
+}
+
 int main(int ac, char **av, char **env){
 
     if (ac != 1 || av[1] != NULL || env[0] == NULL)
         return (0);
 
-    //lexer
+    data = dup_env(env);
+    //lexer test
     char **test = lexer("ls -l | cat -e");
     for(int i = 0; test[i] != NULL; i++){
         char **splt = ft_split(test[i], ' ');
