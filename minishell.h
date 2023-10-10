@@ -21,5 +21,9 @@
 # define STDOUT 1
 # define STDERR 2
 
+typedef struct s_data
+{
+	char **env;
+}	t_data;
 
 #endif
