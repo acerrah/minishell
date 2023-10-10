@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dynamic_array.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 22:12:14 by acerrah           #+#    #+#             */
+/*   Updated: 2023/10/10 22:12:40 by acerrah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
-/*  Dynamic arrays for strings.                                              */
-/*  The dynamic array is implemented as a struct with the following fields:  */
-/*  data - pointer to the array of strings                                   */
-/*  size - number of strings in the array                                    */
-/*  capacity - maximum number of strings that can be stored in the array     */
-/*  The dynamic array is created with the dynarray_create function.          */
-/*  The dynarray_push function adds a string to the end of the array.        */
-/*  The dynarray_destroy function frees the memory allocated for the array.  */
-/*  The dynarray_resize function changes the capacity of the array but       */
-/*  it is not used manually, it is called automatically when the array       */
-/*  is full and a new string is added to it.                                 */
+/*  Dynamic arrays for strings.                                               */
+/*  The dynamic array is implemented as a struct with the following fields:   */
+/*  data - pointer to the array of strings                                    */
+/*  size - number of strings in the array                                     */
+/*  capacity - maximum number of strings that can be stored in the array      */
+/*  The dynamic array is created with the dynarray_create function.           */
+/*  The dynarray_push function adds a string to the end of the array.         */
+/*  The dynarray_destroy function frees the memory allocated for the array.   */
+/*  The dynarray_resize function changes the capacity of the array but        */
+/*  it is not used manually, it is called automatically when the array        */
+/*  is full and a new string is added to it.                                  */
 t_dynarray *dynarray_create() {
     t_dynarray *arr = malloc(sizeof(t_dynarray));
     if (!arr)
