@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/10 22:34:53 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/10 23:09:55 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ int len_env(char **environment)
 	return (i);
 }
 
-void write_env(void)
+void write_exp(void)
 {
 	int i;
 
 	i = 0;
-	while (g_data->env[i])
+	while (g_data->exp->data[i])
 	{
-		printf("declare -x %s\n", g_data->env[i]);
+		printf("declare -x %s\n", g_data->exp->data[i]);
 		i++;
 	}
 }
@@ -100,11 +100,10 @@ char *format_str(char *command)
 void ft_export(char **command)
 {
 	int i;
-	char *formatted_str;
 
 	i = 1;
 	if (command[i] == 0)
-		write_env();
+		write_exp();
 	else
 	{
 		while (command[i])
@@ -118,9 +117,9 @@ void ft_export(char **command)
 				continue ;
 			}
 			else
-				dynarray_create(g_data->export, ft_strjoin("declare -x ", command[i]));
+				dynarray_push(g_data->exp, ft_strjoin("declare -x ", command[i]));
 			if (int_strchr(command[i], '='))
-				dynarray_create(g_data->env, format_str(command[i]));
+				dynarray_push(g_data->env, format_str(command[i]));
 			i++;
 		}
 	}

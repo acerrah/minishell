@@ -41,4 +41,5 @@ void        lexer(char *input_str, bool in_single_quotes,
     bool in_double_quotes, int last_pipe, int i);
 char        **ft_strdup_2d(char **str);
 void        handle_g_data(char **env);
+void        ft_export(char **command);
 #endif

@@ -8,8 +8,8 @@ LIB = ./lib/lib.a
 SRCS  = ./src/main.c \
 		./src/lexer.c \
 		./src/dynamic_array.c \
-		./src/handle_g_data.c
-		
+		./src/handle_g_data.c \
+		./src/export.c
 
 all: $(NAME)
 
