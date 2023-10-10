@@ -24,6 +24,7 @@
 typedef struct s_data
 {
 	char **env;
+	char **export;
 }	t_data;
 
 #endif
