@@ -32,6 +32,13 @@ void handle_g_data(char **env)
         dynarray_push(g_data->env, env[i]);
         i++;
     }
+    g_data->exp = dynarray_create();
+    i = 0;
+    while (env[i])
+    {
+        dynarray_push(g_data->exp, ft_strjoin("declare -x ", env[i]));
+        i++;
+    }
     g_data->lex = dynarray_create();
     g_data->cmd = dynarray_create();
     g_data->redirections = dynarray_create();

@@ -15,7 +15,7 @@
 #define true 1
 #define false 0
 #define bool int
-#define INITIAL_CAPACITY 4
+#define INITIAL_CAPACITY 8
 
 typedef struct s_dynarray {
     char **data;
@@ -26,6 +26,7 @@ typedef struct s_dynarray {
 typedef struct s_data
 {
     t_dynarray *env;
+    t_dynarray *exp;
     t_dynarray *lex;
     t_dynarray *cmd;
     t_dynarray *redirections;

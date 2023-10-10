@@ -13,11 +13,11 @@
 /*  is full and a new string is added to it.                                 */
 t_dynarray *dynarray_create() {
     t_dynarray *arr = malloc(sizeof(t_dynarray));
-    if (!arr) {
+    if (!arr)
         return NULL;
-    }
     arr->data = malloc(INITIAL_CAPACITY * sizeof(char *));
-    if (!arr->data) {
+    if (!arr->data)
+    {
         free(arr);
         return NULL;
     }

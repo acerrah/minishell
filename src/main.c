@@ -32,9 +32,9 @@ int main(int ac, char **av, char **env){
     handle_g_data(env);
     lexer("ls -l \"xd|\" << a > b| cat -e << c", false, false, 0, 0);
     int i = 0;
-    while (g_data->lex->data[i])
+    while (g_data->exp->data[i])
     {
-        printf("%s\n", g_data->lex->data[i]);
+        printf("%s\n", g_data->exp->data[i]);
         i++;
     }
     return 0;
