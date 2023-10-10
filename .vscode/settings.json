@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "files.associations": {
         "*.rmd": "markdown",
         "minishell.h": "c",
@@ -13,3 +14,11 @@
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
+=======
+	"files.associations": {
+		"minishell.h": "c",
+		"get_next_line.h": "c",
+		"stdio.h": "c"
+	}
+}
+>>>>>>> irem
