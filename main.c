@@ -209,14 +209,31 @@ void ft_export(char **command)
 			}
 			else
 				add_environment(command[i]);
-			if (int_strchr(command[i], '='))
+			//if (int_strchr(command[i], '='))
 				//add_env(command[i]);
 			i++;
 		}
 	}
 }
 
-int main(int argc, char **av)
+int main(int argc, char **av, char **env)
 {
-	
+    if (!argc || !av || !env)
+        return (0);
+    //copy env into global_var->env
+    global_var = (t_data *)malloc(sizeof(t_data));
+    global_var->env = ft_calloc(sizeof(char *), len_env(env) + 1);
+    int i = 0;
+    while (env[i])
+    {
+        global_var->env[i] = ft_strdup(env[i]);
+        i++;
+    }
+
+    ft_export(av);
+
+    for (int i = 0; global_var->env[i]; i++)
+        printf("%s\n", global_var->env[i]);
+
+    return (0);
 }
