@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.rmd": "markdown",
+        "minishell.h": "c",
+        "cstdlib": "c",
+        "locale": "c",
+        "array": "c",
+        "vector": "c",
+        "__string": "c",
+        "atomic": "c",
+        "cstring": "c",
+        "memory": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

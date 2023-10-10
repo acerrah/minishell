@@ -5,7 +5,11 @@ CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -rf
 LIB = ./lib/lib.a
 
-SRCS  = main.c
+SRCS  = ./src/main.c \
+		./src/lexer.c \
+		./src/dynamic_array.c \
+		./src/handle_g_data.c
+		
 
 all: $(NAME)
 
@@ -22,7 +26,7 @@ clean:
 
 fclean:	clean
 	@$(RM) $(NAME)
-	@$(RM) $(BONUS_NAME)
+	@$(RM) $(NAME).dSYM
 	@make fclean -C ./lib
 
 re: fclean all
