@@ -10,7 +10,8 @@ SRCS  = ./src/main.c \
 		./src/lexer.c \
 		./src/dynamic_array.c \
 		./src/handle_g_data.c \
-		./src/export.c
+		./src/export.c \
+		./src/dynamic_intarray.c
 
 all: $(NAME)
 
@@ -29,6 +30,11 @@ clean:
 	@make clean -C ./lib
 
 fclean:	clean
+	@$(RM) $(NAME)
+	@$(RM) $(NAME).dSYM
+	@make fclean -C ./lib
+
+ffclean:	clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME).dSYM
 	@make fclean -C ./lib

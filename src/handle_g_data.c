@@ -6,7 +6,7 @@
 /*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:52 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/11 13:31:39 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:56:54 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void handle_g_data(char **env)
     }
     g_data->lex = dynarray_create();
     g_data->cmd = dynarray_create();
-    g_data->redirections = dynarray_create();
-    g_data->heredocs = dynarray_create();
+    g_data->redirections = malloc(sizeof(t_redirections));
+    g_data->redirections->type = dynintarray_create();
+    g_data->redirections->file = dynarray_create();
 }
