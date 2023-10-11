@@ -6,7 +6,7 @@
 /*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:52 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/10 22:12:54 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:31:39 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 extern t_data *g_data;
 
-/* */
+/* handle_g_data function creates the global data structure and fills it with  */
+/* the environment variables.                                                  */
+/* ft_strdup_2d function duplicates an array of strings.                       */
 char **ft_strdup_2d(char **str)
 {
     int i = 0;

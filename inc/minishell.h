@@ -11,6 +11,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #define true 1
 #define false 0

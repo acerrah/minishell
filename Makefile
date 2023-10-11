@@ -1,9 +1,10 @@
 NAME = minishell
-
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I./lib/readline/include -g
 RM = rm -rf
 LIB = ./lib/lib.a
+READLINE = ./lib/readline/.minishell
+LDFLAGS			= -L./lib/readline -lreadline
 
 SRCS  = ./src/main.c \
 		./src/lexer.c \
@@ -13,11 +14,14 @@ SRCS  = ./src/main.c \
 
 all: $(NAME)
 
-$(NAME): $(LIB)
-	@$(CC) $(CFLAGS) $(SRCS) $(LIB) -o $(NAME)
+$(NAME): $(LIB) $(SRCS) 
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(SRCS) $(LIB) -o $(NAME)
 
-$(LIB):
+$(LIB): $(READLINE)
 	@make -C ./lib
+
+$(READLINE):
+	@make -C ./lib/readline
 
 clean:
 	@$(RM) checker.dSYM
