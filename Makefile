@@ -32,6 +32,7 @@ fclean:	clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME).dSYM
 	@make fclean -C ./lib
+	@make fclean -C ./lib/readline
 
 re: fclean all
 
