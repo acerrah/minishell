@@ -17,5 +17,5 @@ int main(int ac, char **av, char **env)
 	ft_unset(command1); // doesn't work
 
 	ft_env(ft_split("env", ' '), 0);
-	ft_export(ft_split("export", ' '));
+	//ft_export(ft_split("export", ' '));
 }

@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 21:31:17 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 12:19:53 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/13 14:00:40 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ extern t_data *g_data;
 
 static void write_environment(void)
 {
-	int i;
-	int len;
+	size_t i;
 
 	i = 0;
-	len = len_env(g_data->env->data);
-	while (i < len)
+	while (i < g_data->env->size)
 		printf("%s\n", g_data->env->data[i++]);
 }
 

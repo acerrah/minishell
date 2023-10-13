@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:31:54 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 12:52:28 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/13 13:57:03 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_unset(char **command)
 	{
 		while (g_data->env->data[j])
 		{
-			if (ft_strncmp(command[i], g_data->env->data[j], ft_strlen(command[i]) == 0))
+			if (ft_strncmp(command[i], g_data->env->data[j], ft_strlen(command[i])) == 0)
 				dynarray_remove(g_data->env, j);
 			j++;
 		}
