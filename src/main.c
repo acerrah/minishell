@@ -1,9 +1,20 @@
-#include "../inc/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/13 13:27:28 by iremoztimur       #+#    #+#             */
+/*   Updated: 2023/10/13 16:27:56 by iremoztimur      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_data *g_data;
+#include "../inc/minishell.h"
 
 int main(int ac, char **av, char **env)
 {
+
 
     if (ac != 1 || av[1] != NULL || env[0] == NULL)
         return (0);
@@ -18,4 +29,5 @@ int main(int ac, char **av, char **env)
 
 	ft_env(ft_split("env", ' '), 0);
 	//ft_export(ft_split("export", ' '));
+	ft_exit(ft_split("exit -1921839012839128", ' '));
 }
