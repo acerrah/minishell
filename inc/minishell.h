@@ -71,6 +71,7 @@ void        dynintarray_resize(t_dynintarray *d_arr, int newCapacity);
 void        dynintarray_push(t_dynintarray *d_arr, int value);
 int         dynintarray_pull(t_dynintarray *d_arr, int index);
 void        dynintarray_set(t_dynintarray *d_arr, int index, int value);
+int			dynarray_remove(t_dynarray *arr, size_t index);
 void        lexer(char *input_str, bool in_single_quotes,
 bool		in_double_quotes, int last_pipe, int i);
 char		**ft_strdup_2d(char **str);
@@ -79,6 +80,8 @@ void		ft_export(char **command);
 void		ft_env(char **command, int flag);
 void		ft_cd(char **command);
 int			ft_echo(char **av);
-void		ft_pwd(void);
+int			ft_pwd(void);
+int			ft_unset(char **command);
+int			len_env(char **environment);
 
 #endif

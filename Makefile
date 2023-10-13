@@ -12,10 +12,11 @@ SRCS  = ./src/main.c \
 		./src/handle_g_data.c \
 		./src/built-in-func/export.c \
 		./src/built-in-func/echo.c \
-		.src/built-in-func/pwd.c \
-		.src/built-in-func/env.c \
-		.src/built-in-func/cd.c \
-		./src/dynamic_intarray.c
+		./src/built-in-func/pwd.c \
+		./src/built-in-func/env.c \
+		./src/built-in-func/cd.c \
+		./src/dynamic_intarray.c \
+		./src/built-in-func/unset.c
 
 all: $(NAME)
 

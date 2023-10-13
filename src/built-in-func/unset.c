@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 21:33:38 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 11:54:18 by iremoztimur      ###   ########.fr       */
+/*   Created: 2023/10/13 10:31:54 by iremoztimur       #+#    #+#             */
+/*   Updated: 2023/10/13 12:52:28 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,24 @@
 
 extern t_data *g_data;
 
-void update_old_path(void)
-{
-	char *path;
-	char buff[BUFF_SIZE + 1];
-
-	path = ft_strjoin("OLDPWD=", getcwd(buff, BUFF_SIZE));
-	dynarray_push(g_data->exp, path);
-	dynarray_push(g_data->env, path);
-	free(path);
-}
-
-void ft_cd(char **command)
+int ft_unset(char **command)
 {
 	int i;
+	int j;
 
 	i = 1;
+	j = 0;
 	if (command[i] == 0)
+		printf("unset: not enough arguments\n");
+	while (command[i])
 	{
-		update_old_path();
-		chdir(getenv("HOME"));
+		while (g_data->env->data[j])
+		{
+			if (ft_strncmp(command[i], g_data->env->data[j], ft_strlen(command[i]) == 0))
+				dynarray_remove(g_data->env, j);
+			j++;
+		}
+		i++;
 	}
-	else
-	{
-		update_old_path();
-		if (chdir(command[i]) == -1)
-			printf("cd: %s: No such file or directory\n", command[i]);
-	}
+	return (SUCCESS);
 }
