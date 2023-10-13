@@ -16,7 +16,8 @@ SRCS  = ./src/main.c \
 		./src/built-in-func/env.c \
 		./src/built-in-func/cd.c \
 		./src/dynamic_intarray.c \
-		./src/built-in-func/unset.c
+		./src/built-in-func/unset.c \
+		./src/signals.c 
 
 all: $(NAME)
 

@@ -29,6 +29,11 @@
 # define STDOUT 1
 # define STDERR 2
 
+//Flags for signal handling
+# define CHILD 0
+# define HEREDOC 1
+# define DEFAULT 2
+
 typedef struct s_dynintarray{
     int *arr;
     int size;
@@ -58,6 +63,8 @@ typedef struct s_data
     t_dynarray *exp;
     t_dynarray *lex;
     t_dynarray *cmd;
+	int			signal_flag;
+	int			signal_selection;
     t_redirections *redirections;
 } t_data;
 
@@ -83,5 +90,6 @@ int			ft_echo(char **av);
 int			ft_pwd(void);
 int			ft_unset(char **command);
 int			len_env(char **environment);
+void		ft_signal_handler(void);
 
 #endif
