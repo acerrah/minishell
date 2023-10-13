@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/cerrah/Docs/Projects/minishellgit/lib/readline/readline
+BUILD_DIR = /Users/iremoztimur/Desktop/gitmainrepo/lib/readline/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/cerrah/Docs/Projects/minishellgit/readline
+prefix = /Users/iremoztimur/Desktop/gitmainrepo/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

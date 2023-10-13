@@ -10,12 +10,16 @@ SRCS  = ./src/main.c \
 		./src/lexer.c \
 		./src/dynamic_array.c \
 		./src/handle_g_data.c \
-		./src/export.c \
+		./src/built-in-func/export.c \
+		./src/built-in-func/echo.c \
+		.src/built-in-func/pwd.c \
+		.src/built-in-func/env.c \
+		.src/built-in-func/cd.c \
 		./src/dynamic_intarray.c
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(SRCS) 
+$(NAME): $(LIB) $(SRCS)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(SRCS) $(LIB) -o $(NAME)
 
 $(LIB): $(READLINE)

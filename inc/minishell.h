@@ -15,10 +15,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+
 #define true 1
 #define false 0
 #define bool int
 #define INITIAL_CAPACITY 8
+
+# define SUCCESS 1
+# define ERROR 0
+# define BUFF_SIZE 4096
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 typedef struct s_dynintarray{
     int *arr;
@@ -63,9 +72,13 @@ void        dynintarray_push(t_dynintarray *d_arr, int value);
 int         dynintarray_pull(t_dynintarray *d_arr, int index);
 void        dynintarray_set(t_dynintarray *d_arr, int index, int value);
 void        lexer(char *input_str, bool in_single_quotes,
-    bool in_double_quotes, int last_pipe, int i);
-char        **ft_strdup_2d(char **str);
-void        handle_g_data(char **env);
-void        ft_export(char **command);
+bool		in_double_quotes, int last_pipe, int i);
+char		**ft_strdup_2d(char **str);
+void		handle_g_data(char **env);
+void		ft_export(char **command);
+void		ft_env(char **command, int flag);
+void		ft_cd(char **command);
+int			ft_echo(char **av);
+void		ft_pwd(void);
 
 #endif
