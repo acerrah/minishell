@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 09:51:14 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/13 18:49:20 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void write_exp(void)
 	}
 }
 
-char *format_str(char *command)
+char *format_exp(char *command)
 {
 	char *variable;
 	char *value;
@@ -87,11 +87,15 @@ char *format_str(char *command)
 	str = ft_split(command, '=');
 	variable = ft_strdup(str[0]);
 	if (str[1])
-		value = add_quotes(ft_strdup(str[1]));
+	{
+		if (str[1][0] != '\"' && str[1][ft_strlen(str[1] - 1)] != '\"')
+			value = add_quotes(ft_strdup(str[1]));
+		else
+			value = ft_strdup(str[1]);
+	}
 	else
 		value = ft_strdup("");
 	ret = ft_strjoin(ft_strjoin(variable, "="), value);
-	free(command);
 	free(variable);
 	free(value);
 	return (ret);
@@ -119,6 +123,33 @@ void single_to_double_quote(char *command)
 	}
 }
 
+// Here is to remove double quotes from the command
+/*
+char *format_env(char *command)
+{
+	char **raw_str;
+	char *res;
+	int len;
+	int i;
+
+	i = 0;
+	res = "a";
+	if (ft_strchr(command, '\"') != 0)
+	{
+		raw_str = ft_split(command, '\"');
+		len = len_env(raw_str);
+		while (i < len)
+		{
+			ft_strjoin(res, raw_str[i]);
+			i++;
+		}
+	}
+	else
+		res = ft_strdup(command);
+	return (res);
+}
+*/
+
 void ft_export(char **command)
 {
 	int i;
@@ -144,11 +175,11 @@ void ft_export(char **command)
 				if (command[i][ft_strlen(command[i]) - 1] == '=')
 					dynarray_push(g_data->exp, ft_strjoin("declare -x ", ft_strjoin(command[i], "\"\"")));
 				else
-					dynarray_push(g_data->exp, ft_strjoin("declare -x ", command[i]));
+					dynarray_push(g_data->exp, ft_strjoin("declare -x ", format_exp(command[i])));
 			}
 			// if variable has a value add to env
 			if (int_strchr(command[i], '='))
-				dynarray_push(g_data->env, format_str(command[i]));
+				dynarray_push(g_data->env, command[i]);
 			i++;
 		}
 	}
