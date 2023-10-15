@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
+/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 22:13:05 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/15 11:04:26 by acerrah          ###   ########.fr       */
+/*   Created: 2023/10/08 20:50:05 by iremoztimur       #+#    #+#             */
+/*   Updated: 2023/10/10 22:09:20 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "minishell.h"
 
-t_data *g_data;
+int ft_pwd(void)
+{
+	char buff[PATH_MAX];
 
-
-int main(int ac, char **av, char **env){
-
-    if (ac != 1 || av[1] != NULL || env[0] == NULL)
-        return (0);
-
-    handle_g_data(env);
-	loop();
-    return 0;
+	if (getcwd(buff, PATH_MAX))
+	{
+		ft_putendl_fd(buff, 1);
+		return (SUCCESS);
+	}
+	else
+		return (ERROR);
 }

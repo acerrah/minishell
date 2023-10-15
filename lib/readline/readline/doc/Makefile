@@ -22,7 +22,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /Users/iremoztimur/Desktop/gitmainrepo/readline
+prefix = /Users/cerrah/Docs/Projects/minishellgit/readline
 
 datarootdir = ${prefix}/share
 
@@ -49,7 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-BUILD_DIR = /Users/iremoztimur/Desktop/gitmainrepo/lib/readline/readline
+BUILD_DIR = /Users/cerrah/Docs/Projects/minishellgit/lib/readline/readline
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

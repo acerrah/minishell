@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dynamic_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:14 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/13 11:27:22 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/13 13:43:42 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int dynarray_push(t_dynarray *arr, char *str) {
     return 0;
 }
 
-int dynarray_remove(t_dynarray *arr, size_t index)
-{
+int dynarray_remove(t_dynarray *arr, size_t index) {
     size_t i;
 
     i = index;
