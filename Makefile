@@ -14,11 +14,14 @@ SRCS  = ./src/main.c \
 		./src/dynamic_intarray.c \
 		./src/redirection.c \
 		./src/loop.c \
-		./src/parser.c 
+		./src/parser.c  \
+		./src/built-in-func/exit.c \
+		./src/utils/exec_utils.c \
+		./src/execution/one_command_exec.c
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(SRCS) 
+$(NAME): $(LIB) $(SRCS)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(SRCS) $(LIB) -o $(NAME)
 
 $(LIB): $(READLINE)

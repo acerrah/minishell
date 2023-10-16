@@ -169,13 +169,13 @@ readline.0: readline.3
 
 readline_3.ps: $(srcdir)/readline.3
 	${RM} $@
-	${GROFF} -man < $(srcdir)/readline.3 > $@ 
+	${GROFF} -man < $(srcdir)/readline.3 > $@
 
 history.0: history.3
 
 history_3.ps: $(srcdir)/history.3
 	${RM} $@
-	${GROFF} -man < $(srcdir)/history.3 > $@ 
+	${GROFF} -man < $(srcdir)/history.3 > $@
 
 readline.pdf:	$(RLSRC)
 	TEXINPUTS=.:$(TEXINPUTDIR):$$TEXINPUTS $(TEXI2PDF) $(srcdir)/rlman.texi
@@ -238,7 +238,7 @@ install:	installdirs
 			$(DESTDIR)$(infodir)/history.info ; \
 		install-info --dir-file=$(DESTDIR)$(infodir)/dir \
 			$(DESTDIR)$(infodir)/rluserman.info ; \
-	else true; fi
+	else TRUE; fi
 	-${INSTALL_DATA} $(srcdir)/readline.3 $(DESTDIR)$(man3dir)/readline$(man3ext)
 	-${INSTALL_DATA} $(srcdir)/history.3 $(DESTDIR)$(man3dir)/history$(man3ext)
 	-if test -n "${htmldir}" ; then \
