@@ -70,7 +70,7 @@ int parser()
                 dynintarray_push(g_data->fd[IN], -2);
             else if (g_data->fd[IN]->size < j + 1 && j == 0)
                 dynintarray_push(g_data->fd[IN], STDIN);
-            if (g_data->fd[OUT]->size < j + 1)
+            if (g_data->fd[OUT]->size < j + 1 && j != g_data->redirections->file->size - 1)
                 dynintarray_push(g_data->fd[OUT], -2);
             dynintarray_push(g_data->fd[IN], -2);
             i++;
