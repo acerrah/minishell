@@ -15,15 +15,12 @@ SRCS  = ./src/main.c \
 		./src/loop.c \
 		./src/parser.c  \
 		./src/built-in-func/exit.c \
-		./src/utils/exec_utils.c \
-		./src/execution/one_command_exec.c \
 		./src/built-in-func/cd.c \
 		./src/built-in-func/echo.c \
 		./src/built-in-func/env.c \
 		./src/built-in-func/export.c \
 		./src/built-in-func/pwd.c \
 		./src/built-in-func/unset.c \
-		./src/built-in-func/exit.c \
 		./src/execution/one_command_exec.c \
 		./src/signals/signal_handler.c \
 		./src/utils/exec_utils.c \

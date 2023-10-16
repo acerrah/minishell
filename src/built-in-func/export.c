@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/15 12:16:17 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/16 21:57:12 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ char	*add_quotes(char *str)
 	new_str[len + 2] = '\0';
 	free(str);
 	return(new_str);
-}
-
-
-int len_2d(char **environment)
-{
-	int i;
-
-	i = 0;
-	while (environment[i])
-		i++;
-	return (i);
 }
 
 void write_exp(void)

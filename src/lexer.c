@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
+/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:58 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/15 12:13:14 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:37:31 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int lexer(char *input_str, bool in_single_quotes,
 {
     while (input_str[i])
     {
-        if (input_str[i] == '\'' && !in_double_quotes) 
+        if (input_str[i] == '\'' && !in_double_quotes)
             in_single_quotes = !in_single_quotes;
         else if (input_str[i] == '"' && !in_single_quotes)
             in_double_quotes = !in_double_quotes;
