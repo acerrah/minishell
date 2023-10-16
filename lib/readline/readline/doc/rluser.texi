@@ -55,7 +55,7 @@ By default, the line editing commands are similar to those of Emacs.
 A vi-style line editing interface is also available.
 Line editing can be enabled at any time using the @option{-o emacs} or
 @option{-o vi} options to the @code{set} builtin command
-(@pxref{The Set Builtin}), or disabled using the @option{+o emacs} or 
+(@pxref{The Set Builtin}), or disabled using the @option{+o emacs} or
 @option{+o vi} options to @code{set}.
 @end ifset
 
@@ -646,7 +646,7 @@ By default, this variable is set to @samp{off}.
 If set to @samp{on}, Readline will enable eight-bit input (it
 will not clear the eighth bit in the characters it reads),
 regardless of what the terminal claims it can support.  The
-default value is @samp{off}, but Readline will set it to @samp{on} if the 
+default value is @samp{off}, but Readline will set it to @samp{on} if the
 locale contains eight-bit characters.
 The name @code{meta-flag} is a synonym for this variable.
 
@@ -753,7 +753,7 @@ calls to @code{readline}.  The default is @samp{off}.
 @item show-all-if-ambiguous
 @vindex show-all-if-ambiguous
 This alters the default behavior of the completion functions.  If
-set to @samp{on}, 
+set to @samp{on},
 words which have more than one possible completion cause the
 matches to be listed immediately instead of ringing the bell.
 The default value is @samp{off}.
@@ -762,7 +762,7 @@ The default value is @samp{off}.
 @vindex show-all-if-unmodified
 This alters the default behavior of the completion functions in
 a fashion similar to @var{show-all-if-ambiguous}.
-If set to @samp{on}, 
+If set to @samp{on},
 words which have more than one possible completion without any
 possible partial completion (the possible completions don't share
 a common prefix) cause the matches to be listed immediately instead
@@ -1020,7 +1020,7 @@ $endif
 The @var{application} construct is used to include
 application-specific settings.  Each program using the Readline
 library sets the @var{application name}, and you can test for
-a particular value. 
+a particular value.
 This could be used to bind key sequences to functions useful for
 a specific program.  For instance, the following command adds a
 key sequence that quotes the current or previous word in Bash:
@@ -1088,7 +1088,7 @@ $include /etc/Inputrc
 #
 # Set various bindings for emacs mode.
 
-set editing-mode emacs 
+set editing-mode emacs
 
 $if mode=emacs
 
@@ -1601,7 +1601,7 @@ The actual completion performed is application-specific.
 Bash attempts completion treating the text as a variable (if the
 text begins with @samp{$}), username (if the text begins with
 @samp{~}), hostname (if the text begins with @samp{@@}), or
-command (including aliases and functions) in turn.  If none 
+command (including aliases and functions) in turn.  If none
 of these produces a match, filename completion is attempted.
 @end ifset
 @ifclear BashFeatures
@@ -1928,7 +1928,7 @@ so forth.
 When word completion is attempted for an argument to a command for
 which a completion specification (a @var{compspec}) has been defined
 using the @code{complete} builtin (@pxref{Programmable Completion Builtins}),
-the programmable completion facilities are invoked. 
+the programmable completion facilities are invoked.
 
 First, the command name is identified.
 If a compspec has been defined for that command, the
@@ -1944,7 +1944,7 @@ If those searches do not result in a compspec, any compspec defined with
 the @option{-D} option to @code{complete} is used as the default.
 If there is no default compspec, Bash attempts alias expansion
 on the command word as a final resort, and attempts to find a compspec
-for the command word from any successful expansion 
+for the command word from any successful expansion
 
 Once a compspec has been found, it is used to generate the list of
 matching words.
@@ -2031,7 +2031,7 @@ completions.
 
 If the previously-applied actions do not generate any matches, and the
 @option{-o dirnames} option was supplied to @code{complete} when the
-compspec was defined, directory name completion is attempted. 
+compspec was defined, directory name completion is attempted.
 
 If the @option{-o plusdirs} option was supplied to @code{complete} when
 the compspec was defined, directory name completion is attempted and any
@@ -2109,7 +2109,7 @@ with the same flags.
 If @var{word} is specified, only those completions matching @var{word}
 will be displayed.
 
-The return value is true unless an invalid option is supplied, or no
+The return value is TRUE unless an invalid option is supplied, or no
 matches were generated.
 
 @item complete
@@ -2132,7 +2132,7 @@ The @option{-D} option indicates that other supplied options and actions should
 apply to the ``default'' command completion; that is, completion attempted
 on a command for which no completion has previously been defined.
 The @option{-E} option indicates that other supplied options and actions should
-apply to ``empty'' command completion; that is, completion attempted on a 
+apply to ``empty'' command completion; that is, completion attempted on a
 blank line.
 The @option{-I} option indicates that other supplied options and actions should
 apply to completion on the initial non-assignment word on the line, or after a
@@ -2158,7 +2158,7 @@ should be quoted to protect them from expansion before the
 @item -o @var{comp-option}
 The @var{comp-option} controls several aspects of the compspec's behavior
 beyond the simple generation of completions.
-@var{comp-option} may be one of: 
+@var{comp-option} may be one of:
 
 @table @code
 
@@ -2192,7 +2192,7 @@ Tell Readline not to append a space (the default) to words completed at
 the end of the line.
 
 @item plusdirs
-After any matches defined by the compspec are generated, 
+After any matches defined by the compspec are generated,
 directory name completion is attempted and any
 matches are added to the results of the other actions.
 
@@ -2321,7 +2321,7 @@ A leading @samp{!} in @var{filterpat} negates the pattern; in this
 case, any completion not matching @var{filterpat} is removed.
 @end table
 
-The return value is true unless an invalid option is supplied, an option
+The return value is TRUE unless an invalid option is supplied, an option
 other than @option{-p} or @option{-r} is supplied without a @var{name}
 argument, an attempt is made to remove a completion specification for
 a @var{name} for which no specification exists, or
@@ -2343,7 +2343,7 @@ The @option{-D} option indicates that other supplied options should
 apply to the ``default'' command completion; that is, completion attempted
 on a command for which no completion has previously been defined.
 The @option{-E} option indicates that other supplied options should
-apply to ``empty'' command completion; that is, completion attempted on a 
+apply to ``empty'' command completion; that is, completion attempted on a
 blank line.
 The @option{-I} option indicates that other supplied options should
 apply to completion on the initial non-assignment word on the line, or after a
@@ -2353,7 +2353,7 @@ name completion.
 If multiple options are supplied, the @option{-D} option takes precedence
 over @option{-E}, and both take precedence over @option{-I}
 
-The return value is true unless an invalid option is supplied, an attempt
+The return value is TRUE unless an invalid option is supplied, an attempt
 is made to modify the options for a @var{name} for which no completion
 specification exists, or an output error occurs.
 
@@ -2419,7 +2419,7 @@ _comp_cd()
         _cdpath=$@{_cdpath//::/:.:@}
         _cdpath=$@{_cdpath/%:/:.@}
         for i in $@{_cdpath//:/$'\n'@}; do
-            if [[ $i -ef . ]]; then _skipdot=true; fi
+            if [[ $i -ef . ]]; then _skipdot=TRUE; fi
             k="$@{#COMPREPLY[@@]@}"
             for j in $( compgen -d -- "$i/$cur" ); do
                 COMPREPLY[k++]=$@{j#$i/@}        # cut off directory

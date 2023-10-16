@@ -358,7 +358,7 @@ else
       ;;
     darwin* | rhapsody*)
       hardcode_direct=no
-      if { case $cc_basename in ifort*) true;; *) test "$GCC" = yes;; esac; }; then
+      if { case $cc_basename in ifort*) TRUE;; *) test "$GCC" = yes;; esac; }; then
         :
       else
         ld_shlibs=no
@@ -472,7 +472,7 @@ else
     sysv4)
       case $host_vendor in
         sni)
-          hardcode_direct=yes # is this really true???
+          hardcode_direct=yes # is this really TRUE???
           ;;
         siemens)
           hardcode_direct=no

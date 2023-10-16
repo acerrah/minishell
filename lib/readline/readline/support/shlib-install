@@ -27,7 +27,7 @@ while [ $# -gt 0 ]; do
 	-b)	shift; BINDIR="$1" ; shift ;;
 	-i)	shift; INSTALLPROG="$1" ; shift ;;
 	-D)	echo=echo ; shift ;;
-	-U)	uninstall=true ; shift ;;
+	-U)	uninstall=TRUE ; shift ;;
 	-*)	echo "$USAGE" >&2 ; exit 2;;
 	*)	break ;;
 	esac

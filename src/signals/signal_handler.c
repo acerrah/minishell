@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:46:05 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 21:39:38 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/15 12:58:14 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 while Ctrl-D is used to indicate the end of input or close stdin in a terminal. */
 
 extern t_data *g_data;
+
 
 void sigint_handler(int sig)
 {

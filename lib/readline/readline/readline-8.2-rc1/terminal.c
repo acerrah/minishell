@@ -3,7 +3,7 @@
 /* Copyright (C) 1996-2022 Free Software Foundation, Inc.
 
    This file is part of the GNU Readline Library (Readline), a library
-   for reading lines of text with interactive input and history editing.      
+   for reading lines of text with interactive input and history editing.
 
    Readline is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -104,7 +104,7 @@ static int tcap_initialized;
 
 #if !defined (__linux__) && !defined (NCURSES_VERSION)
 #  if defined (__EMX__) || defined (NEED_EXTERN_PC)
-extern 
+extern
 #  endif /* __EMX__ || NEED_EXTERN_PC */
 char PC, *BC, *UP;
 #endif /* !__linux__ && !NCURSES_VERSION */
@@ -249,7 +249,7 @@ _win_get_screensize (int *swp, int *shp)
 #endif
 
 /* Get readline's idea of the screen size.  TTY is a file descriptor open
-   to the terminal.  If IGNORE_ENV is true, we do not pay attention to the
+   to the terminal.  If IGNORE_ENV is TRUE, we do not pay attention to the
    values of $LINES and $COLUMNS.  The tests for TERM_STRING_BUFFER being
    non-null serve to check whether or not we have initialized termcap. */
 void
@@ -387,7 +387,7 @@ _rl_sigwinch_resize_terminal (void)
 {
   _rl_get_screen_size (fileno (rl_instream), 1);
 }
-	
+
 void
 rl_resize_terminal (void)
 {
@@ -573,7 +573,7 @@ _rl_init_terminal_io (const char *terminal_name)
       _rl_enable_active_region = 0;
       _rl_reset_region_color (0, NULL);
       _rl_reset_region_color (1, NULL);
-    
+
       /* Reasonable defaults for tgoto().  Readline currently only uses
          tgoto if _rl_term_IC or _rl_term_DC is defined, but just in case we
          change that later... */

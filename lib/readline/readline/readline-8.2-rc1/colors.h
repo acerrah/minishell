@@ -43,8 +43,8 @@ typedef int _rl_bool_t;
 #endif
 #define bool _rl_bool_t
 
-#ifndef true
-#  define true 1
+#ifndef TRUE
+#  define TRUE 1
 #  define false 0
 #endif
 

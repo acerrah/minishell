@@ -1798,7 +1798,7 @@ do
     1) as_fn_append ac_configure_args0 " '$ac_arg'" ;;
     2)
       as_fn_append ac_configure_args1 " '$ac_arg'"
-      if test $ac_must_keep_next = true; then
+      if test $ac_must_keep_next = TRUE; then
 	ac_must_keep_next=false # Got value, back to normal.
       else
 	case $ac_arg in
@@ -1810,7 +1810,7 @@ do
 	      "$ac_configure_args1"*" '$ac_arg' "* ) continue ;;
 	    esac
 	    ;;
-	  -* ) ac_must_keep_next=true ;;
+	  -* ) ac_must_keep_next=TRUE ;;
 	esac
       fi
       as_fn_append ac_configure_args " '$ac_arg'"
@@ -2804,9 +2804,9 @@ static char *f (char * (*g) (char **, int), char **p, ...)
    function prototypes and stuff, but not '\xHH' hex character constants.
    These don't provoke an error unfortunately, instead are silently treated
    as 'x'.  The following induces an error, until -std is added to get
-   proper ANSI mode.  Curiously '\x00'!='x' always comes out true, for an
+   proper ANSI mode.  Curiously '\x00'!='x' always comes out TRUE, for an
    array size at least.  It's necessary to write '\x00'==0 to get something
-   that's true only with -std.  */
+   that's TRUE only with -std.  */
 int osf4_cc_array ['\x00' == 0 ? 1 : -1];
 
 /* IBM C 6 for AIX is almost-ANSI by default, but it replaces macro parameters

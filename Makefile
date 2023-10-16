@@ -17,7 +17,9 @@ SRCS  = ./src/main.c \
 		./src/built-in-func/cd.c \
 		./src/dynamic_intarray.c \
 		./src/built-in-func/unset.c \
-		./src/signals.c 
+		./src/built-in-func/exit.c \
+		./src/utils/exec_utils.c \
+		./src/execution/one_command_exec.c
 
 all: $(NAME)
 

@@ -91,7 +91,7 @@ struct bin_str _rl_color_indicator[] =
    decoding all kinds of escape characters.  If equals_end is set an
    unescaped equal sign ends the string, otherwise only a : or \0
    does.  Set *OUTPUT_COUNT to the number of bytes output.  Return
-   true if successful.
+   TRUE if successful.
 
    The resulting string is *not* null-terminated, but may contain
    embedded nulls.
@@ -348,7 +348,7 @@ void _rl_parse_colors(void)
               ++p;
               ext->ext.string = buf;
 
-              state = (get_funky_string (&buf, &p, true, &ext->ext.len)
+              state = (get_funky_string (&buf, &p, TRUE, &ext->ext.len)
                        ? 4 : -1);
               break;
 

@@ -16,8 +16,8 @@
 # include <readline/history.h>
 
 
-#define true 1
-#define false 0
+#define TRUE 1
+#define FALSE 0
 #define bool int
 #define INITIAL_CAPACITY 8
 
@@ -65,6 +65,11 @@ typedef struct s_data
     t_dynarray *cmd;
 	int			signal_flag;
 	int			signal_selection;
+	int			pid;
+	int			in_fd;
+	int			out_fd;
+	int			status;
+	char		**path;
     t_redirections *redirections;
 } t_data;
 
@@ -84,12 +89,15 @@ bool		in_double_quotes, int last_pipe, int i);
 char		**ft_strdup_2d(char **str);
 void		handle_g_data(char **env);
 void		ft_export(char **command);
-void		ft_env(char **command, int flag);
+void		ft_env(char **command);
 void		ft_cd(char **command);
 int			ft_echo(char **av);
 int			ft_pwd(void);
 int			ft_unset(char **command);
-int			len_env(char **environment);
+int			len_2d(char **environment);
 void		ft_signal_handler(void);
+int			is_it_builtin(char **command);
+void		execute_builtin(char **command);
+char		*find_actual_path(char **command);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 18:49:20 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/15 12:16:17 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*add_quotes(char *str)
 }
 
 
-int len_env(char **environment)
+int len_2d(char **environment)
 {
 	int i;
 
@@ -137,7 +137,7 @@ char *format_env(char *command)
 	if (ft_strchr(command, '\"') != 0)
 	{
 		raw_str = ft_split(command, '\"');
-		len = len_env(raw_str);
+		len = len_2d(raw_str);
 		while (i < len)
 		{
 			ft_strjoin(res, raw_str[i]);

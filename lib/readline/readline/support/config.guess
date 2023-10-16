@@ -779,7 +779,7 @@ EOF
 	{
 	  long cpu = sysconf (_SC_CPU_VERSION);
 	  /* The order matters, because CPU_IS_HP_MC68K erroneously returns
-	     true for CPU_PA_RISC1_0.  CPU_IS_PA_RISC returns correct
+	     TRUE for CPU_PA_RISC1_0.  CPU_IS_PA_RISC returns correct
 	     results, however.  */
 	  if (CPU_IS_PA_RISC (cpu))
 	    {
