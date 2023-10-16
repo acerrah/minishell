@@ -47,13 +47,13 @@ void loop(void)
 {
     char *input_str;
 
-    while (true)
+    while (TRUE)
     {
         input_str = readline("minishell-0.1$ ");
         if (ft_strtrim(input_str, " ") == NULL)
             continue;
         add_history(input_str);
-        if (lexer(input_str, false, false, 0, 0) != 0)
+        if (lexer(input_str, FALSE, FALSE, 0, 0) != 0)
         {
             loop_clear(input_str);
             continue;

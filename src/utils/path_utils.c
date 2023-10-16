@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:10:02 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/16 20:29:59 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/16 21:13:56 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	find_path(void)
 	int i;
 
 	i = 0;
-	while (g_data->envp[i])
+	while (g_data->env->data[i])
 	{
-		if (ft_strncmp(g_data->envp[i], "PATH=", 5) == 0)
+		if (ft_strncmp(g_data->env->data[i], "PATH=", 5) == 0)
 		{
-			g_data->path = ft_split(g_data->envp[i] + 5, ':');
+			g_data->path = ft_split(g_data->env->data[i] + 5, ':');
 			break ;
 		}
 		i++;
@@ -31,7 +31,7 @@ static void	find_path(void)
 
 }
 
-statis char	*access_valid_path(char *command)
+static char	*access_valid_path(char *command)
 {
 	int i;
 	char *actual_path;
@@ -54,7 +54,6 @@ statis char	*access_valid_path(char *command)
 
 char	*find_actual_path(char **command)
 {
-	int i;
 	char *actual_path;
 
 	find_path();
@@ -64,8 +63,8 @@ char	*find_actual_path(char **command)
 	if (command == NULL)
 		return (NULL);
 	// if it is absolute path return it
-	if (command[0][0] == '/' && access(command[0], F_OK) != -1))
-	 	return (command[0]);
+	if (command[0][0] == '/' && access(command[0], F_OK) != -1)
+		return (command[0]);
 	actual_path = access_valid_path(command[0]);
 	if (actual_path)
 		return (actual_path);

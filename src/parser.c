@@ -2,7 +2,7 @@
 
 extern t_data *g_data;
 
-/* pipe[2]: index 0 - fd_in, index 1 - fd_out. */ 
+/* pipe[2]: index 0 - fd_in, index 1 - fd_out. */
 /*
 typedef struct files
 {
@@ -51,7 +51,7 @@ int parser()
     //command table'a sırasıyla in, out, command, flags, args, NULL eklenir.
     //command table 2d dynamic string array olacak
     //her bir pipe bir line olarak alınacak
-    
+
     size_t i;
     int j;
 
@@ -124,8 +124,8 @@ int parser()
     i = 0;
     j = 0;
     //lexer'ın içindeki flag ve argümanları space göre parçalara ayır
-    int in_single_quotes = false;
-    int in_double_quotes = false;
+    int in_single_quotes = FALSE;
+    int in_double_quotes = FALSE;
     int k = 0;
     int l = 0;
     int m = 0;

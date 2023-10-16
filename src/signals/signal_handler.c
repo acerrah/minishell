@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:46:05 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/15 12:58:14 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/16 21:22:56 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ extern t_data *g_data;
 void sigint_handler(int sig)
 {
 	(void)sig;
-	if (g_data->signal_selection == HEREDOC)
+	if (g_data->signal_select == HEREDOC)
 	{
 		g_data->signal_flag = 0;
 		ft_putendl_fd("Deutchland Train> ", 1);
 
 	}
-	else if(g_data->signal_selection != CHILD)
+	else if(g_data->signal_select != CHILD)
 	{
-		g_data.signal_flag = 0;
+		g_data->signal_flag = 0;
 		ft_putendl_fd("Deutchland Train> ", 1);
 	}
 	else
@@ -45,7 +45,7 @@ void sigquit_handler(int sig) {
 }
 
 
-void ft_signal_handler(void)
+int ft_signal_handler(void)
 {
 	if (signal(SIGINT, sigint_handler) == SIG_ERR) // CTRL-C Handler
 	{
@@ -55,6 +55,7 @@ void ft_signal_handler(void)
 	if (signal(SIGQUIT, sigquit_handler) == SIG_ERR) // CTRL-\ Handler
 	{
 		ft_putendl_fd("Failed to register the Ctrl-\\ signal handler.", 1);
-		return  1;
+		return 1;
 	}
+	return (0);
 }

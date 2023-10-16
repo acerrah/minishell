@@ -6,11 +6,11 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 13:27:28 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 16:25:55 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/16 21:24:58 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/minishell.h"
+#include "../../inc/minishell.h"
 
 extern t_data *g_data;
 
@@ -24,7 +24,7 @@ int	len_2d(char **command)
 	return (i);
 }
 
-int digit_control(char *str)
+static int digit_control(char *str)
 {
 	int i;
 
