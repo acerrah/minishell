@@ -24,10 +24,10 @@
 #define REDIR_OUT_APPEND 2
 #define REDIR_IN 3
 #define REDIR_IN_HERE_DOC 4
-#define STDIN 0
-#define STDOUT 1
 #define IN 0
 #define OUT 1
+#define STDIN 0
+#define STDOUT 1
 
 typedef struct s_dynintarray{
     int *arr;

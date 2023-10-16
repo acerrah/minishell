@@ -32,7 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /Users/cerrah/Docs/Projects/minishellgit/lib/readline/readline
+BUILD_DIR = /Users/cerrah/Docs/Projects/gitgit/lib/readline/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -52,7 +52,7 @@ SHELL = /bin/sh
 host_os = darwin22.1.0
 host_vendor = apple
 
-prefix = /Users/cerrah/Docs/Projects/minishellgit/readline
+prefix = /Users/cerrah/Docs/Projects/gitgit/readline
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin

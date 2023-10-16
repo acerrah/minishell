@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/cerrah/Docs/Projects/minishellgit/readline
+prefix = /Users/cerrah/Docs/Projects/gitgit/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/cerrah/Docs/Projects/minishellgit/lib/readline/readline
+BUILD_DIR = /Users/cerrah/Docs/Projects/gitgit/lib/readline/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

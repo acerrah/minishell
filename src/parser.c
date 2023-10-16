@@ -57,32 +57,48 @@ int parser()
 
     i = 0;
     j = 0;
+    if (g_data->redirections->file->size == 0)
+    {
+        dynintarray_push(g_data->fd[IN], STDIN);
+        dynintarray_push(g_data->fd[OUT], STDOUT);
+    }
     while (i < g_data->redirections->file->size)
     {
         if (g_data->redirections->type->arr[i] == PIPE)
         {
-            if (g_data->fd[IN]->size < j + 1)
+            if (g_data->fd[IN]->size < j + 1 && j != 0)
+                dynintarray_push(g_data->fd[IN], -2);
+            else if (g_data->fd[IN]->size < j + 1 && j == 0)
                 dynintarray_push(g_data->fd[IN], STDIN);
             if (g_data->fd[OUT]->size < j + 1)
-                dynintarray_push(g_data->fd[OUT], open("tmp", O_RDWR | O_CREAT | O_TRUNC, 0644));
-            dynintarray_push(g_data->fd[IN], g_data->fd[OUT]->arr[j]);
+                dynintarray_push(g_data->fd[OUT], -2);
+            dynintarray_push(g_data->fd[IN], -2);
             i++;
             j++;
             continue;
         }
         else if (g_data->redirections->type->arr[i] == REDIR_IN || g_data->redirections->type->arr[i] == REDIR_IN_HERE_DOC)
         {
-            if (g_data->fd[IN]->size == j + 1)
+            if (g_data->fd[IN]->size == j + 1 && g_data->redirections->type->arr[i] != REDIR_IN_HERE_DOC)
+            {
+                close(g_data->fd[IN]->arr[j]);
                 dynintarray_pull(g_data->fd[IN], j);
+            }
             if (g_data->redirections->type->arr[i] == REDIR_IN)
                 dynintarray_push(g_data->fd[IN], open(g_data->redirections->file->data[i], O_RDONLY));
             else
-                dynintarray_push(g_data->fd[IN], heredoc(g_data->redirections->file->data[i]));
+            {
+                close(g_data->fd[IN]->arr[j]);
+                dynintarray_set(g_data->fd[IN], 0, heredoc(g_data->redirections->file->data[i]));
+            }
         }
         else if (g_data->redirections->type->arr[i] == REDIR_OUT || g_data->redirections->type->arr[i] == REDIR_OUT_APPEND)
         {
             if (g_data->fd[OUT]->size == j + 1)
+            {
+                close(g_data->fd[OUT]->arr[j]);
                 dynintarray_pull(g_data->fd[OUT], j);
+            }
             if (g_data->redirections->type->arr[i] == REDIR_OUT)
                 dynintarray_push(g_data->fd[OUT], open(g_data->redirections->file->data[i], O_WRONLY | O_CREAT | O_TRUNC, 0644));
             else

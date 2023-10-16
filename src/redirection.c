@@ -3,12 +3,12 @@
 extern t_data *g_data;
 
 /* types are as follows: */
-/* 0: no redirection     */
-/* 1: >                  */
-/* 2: >>                 */
-/* 3: <                  */
-/* 4: <<                 */
-/* 5: |                  */
+/* -2: no redirection    */
+/*  0: |                 */
+/*  1: >                 */
+/*  2: >>                */
+/*  3: <                 */
+/*  4: <<                */
 char *next_arg_in_quote(char *str, int i)
 {
     int j;
