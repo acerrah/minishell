@@ -47,13 +47,13 @@ void loop(void)
 {
     char *input_str;
 
-    while (TRUE)
+    while (true)
     {
         input_str = readline("minishell-0.2$ ");
         if (ft_strtrim(input_str, " ") == NULL)
             continue;
         add_history(input_str);
-        if (lexer(input_str, FALSE, FALSE, 0, 0) != 0)
+        if (lexer(input_str, false, false, 0, 0) != 0)
         {
             loop_clear(input_str);
             continue;
@@ -70,7 +70,6 @@ void loop(void)
             printf("fd[OUT] = %d\n", g_data->fd[OUT]->arr[i]);
         }*/
         //execute(command);
-		init_one_line_execution();
 		loop_clear(input_str);
     }
 }

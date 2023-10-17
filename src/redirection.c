@@ -12,7 +12,7 @@ extern t_data *g_data;
 char *next_arg_in_quote(char *str, int i)
 {
     int j;
-
+    
     if (str[i] == '\'')
     {
         i++;
@@ -89,7 +89,7 @@ char *take_last_arg(char *str, int i)
             i--;
         return (ft_substr(str, i + 1, ft_strlen(str) - i - j));
     }
-
+    
 }
 
 void delete_last_arg(char *str, int i)
@@ -208,8 +208,8 @@ int redirections()
 {
     int i = 0;
     int j = 0;
-    bool in_single_quotes = FALSE;
-    bool in_double_quotes = FALSE;
+    bool in_single_quotes = false;
+    bool in_double_quotes = false;
     char **str = g_data->lex->data;
     while (str[i])
     {
@@ -226,7 +226,7 @@ int redirections()
             else if (str[i][j] == '"' && !in_single_quotes)
                 in_double_quotes = !in_double_quotes;
             else if (str[i][j] == '>' && !in_single_quotes && !in_double_quotes)
-            {
+            {                
                 if (output(str[i], j) == 258)
                     return 258;
             }
