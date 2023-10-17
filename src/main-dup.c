@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   main-dup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 11:28:21 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/17 10:34:06 by iremoztimur      ###   ########.fr       */
+/*   Created: 2023/10/10 22:13:05 by acerrah           #+#    #+#             */
+/*   Updated: 2023/10/17 00:09:05 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*back;
-	size_t	total_len;
+t_data *g_data;
 
-	if (!s1 || !s2)
-		return (0);
-	total_len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
-	back = malloc(total_len * sizeof(char));
-	if (!back)
-		return (0);
-	ft_strlcpy(back, s1, ft_strlen(s1) + 1);
-	ft_strlcat(back, s2, total_len);
-	return (back);
+
+int main(int ac, char **av, char **env){
+
+    if (ac != 1 || av[1] != NULL || env[0] == NULL)
+        return (0);
+
+    handle_g_data(env);
+	loop();
+    return 0;
 }
-

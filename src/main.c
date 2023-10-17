@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:13:05 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/16 21:40:05 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/17 09:41:56 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int main(int ac, char **av, char **env){
         return (0);
 
     handle_g_data(env);
-	loop();
+	init_one_line_execution();
     return 0;
 }

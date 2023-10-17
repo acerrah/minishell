@@ -107,5 +107,6 @@ void		loop(void);
 void		loop_clear(char *input_str);
 int			parser();
 int			redirections();
+void		init_one_line_execution(void);
 
 #endif

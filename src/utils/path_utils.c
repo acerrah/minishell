@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:10:02 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/16 21:13:56 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/17 10:40:08 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ static void	find_path(void)
 
 }
 
+char	*new_str_join(char *s1, char *s2)
+{
+	char	*back;
+	size_t	total_len;
+
+	if (!s1 || !s2)
+		return (0);
+	total_len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
+	back = malloc(total_len * sizeof(char));
+	if (!back)
+		return (0);
+	ft_strlcpy(back, s1, ft_strlen(s1) + 1);
+	ft_strlcat(back, s2, total_len);
+	free(s1);
+	return (back);
+}
+
 static char	*access_valid_path(char *command)
 {
 	int i;
@@ -40,9 +57,9 @@ static char	*access_valid_path(char *command)
 	while (g_data->path[i])
 	{
 		actual_path = ft_strdup(g_data->path[i]);
-		actual_path = ft_strjoin(actual_path, "/");
-		actual_path = ft_strjoin(g_data->path[i], command);
-		if (access(actual_path, F_OK) == 0)
+		actual_path = new_str_join(actual_path, "/");
+		actual_path = new_str_join(actual_path, command);
+		if (access(actual_path, F_OK) != -1)
 			return (actual_path);
 		free(actual_path);
 		i++;
