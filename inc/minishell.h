@@ -15,8 +15,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+<<<<<<< HEAD
 #define true 1
 #define false 0
+=======
+
+#define TRUE 1
+#define FALSE 0
+>>>>>>> irem
 #define bool int
 #define INITIAL_CAPACITY 8
 #define PIPE 0
@@ -28,6 +34,11 @@
 #define OUT 1
 #define STDIN 0
 #define STDOUT 1
+
+//Flags for signal handling
+# define CHILD 0
+# define HEREDOC 1
+# define DEFAULT 2
 
 typedef struct s_dynintarray{
     int *arr;
@@ -51,13 +62,53 @@ typedef struct s_data
     t_dynarray *env;
     t_dynarray *exp;
     t_dynarray *lex;
+<<<<<<< HEAD
     t_dynarray *lex_parsed;
     t_dynarray **cmd;
     t_dynintarray **fd;
+=======
+    t_dynarray *cmd;
+	int			signal_flag;
+	int			signal_selection;
+	int			pid;
+	int			in_fd;
+	int			out_fd;
+	int			status;
+	char		**path;
+>>>>>>> irem
     t_redirections *redirections;
     int line;
 } t_data;
 
+<<<<<<< HEAD
+=======
+t_dynarray *dynarray_create();
+void        dynarray_destroy(t_dynarray *arr);
+int         dynarray_resize(t_dynarray *arr, size_t new_capacity);
+int         dynarray_push(t_dynarray *arr, char *str);
+t_dynintarray* dynintarray_create();
+void        dynintarray_destroy(t_dynintarray *d_arr);
+void        dynintarray_resize(t_dynintarray *d_arr, int newCapacity);
+void        dynintarray_push(t_dynintarray *d_arr, int value);
+int         dynintarray_pull(t_dynintarray *d_arr, int index);
+void        dynintarray_set(t_dynintarray *d_arr, int index, int value);
+int			dynarray_remove(t_dynarray *arr, size_t index);
+void        lexer(char *input_str, bool in_single_quotes,
+bool		in_double_quotes, int last_pipe, int i);
+char		**ft_strdup_2d(char **str);
+void		handle_g_data(char **env);
+void		ft_export(char **command);
+void		ft_env(char **command);
+void		ft_cd(char **command);
+int			ft_echo(char **av);
+int			ft_pwd(void);
+int			ft_unset(char **command);
+int			len_2d(char **environment);
+void		ft_signal_handler(void);
+int			is_it_builtin(char **command);
+void		execute_builtin(char **command);
+char		*find_actual_path(char **command);
+>>>>>>> irem
 
 t_dynarray      *dynarray_create();
 void            dynarray_destroy(t_dynarray *arr);
