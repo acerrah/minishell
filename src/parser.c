@@ -70,7 +70,7 @@ int parser()
                 dynintarray_push(g_data->fd[IN], -2);
             else if (g_data->fd[IN]->size < j + 1 && j == 0)
                 dynintarray_push(g_data->fd[IN], STDIN);
-            if (g_data->fd[OUT]->size < j + 1 && j != g_data->redirections->file->size - 1)
+            if (g_data->fd[OUT]->size < j + 1)
                 dynintarray_push(g_data->fd[OUT], -2);
             dynintarray_push(g_data->fd[IN], -2);
             i++;
@@ -104,11 +104,7 @@ int parser()
             else
                 dynintarray_push(g_data->fd[OUT], open(g_data->redirections->file->data[i], O_WRONLY | O_CREAT | O_APPEND, 0644));
         }
-        if (i + 1 == g_data->redirections->file->size)
-        {
-            if (g_data->fd[OUT]->size < j + 1)
-                dynintarray_push(g_data->fd[OUT], STDOUT);
-        }
+
         i++;
     }
     i = 0;
@@ -119,6 +115,8 @@ int parser()
             j++;
         i++;
     }
+    if (j > 0 && g_data->fd[OUT]->size != j + 1)
+        dynintarray_push(g_data->fd[OUT], STDOUT);
     g_data->line = j + 1;
     g_data->cmd = malloc(sizeof(t_dynarray *) * (j + 1) );
     i = 0;
