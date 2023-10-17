@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:38:18 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/17 21:15:12 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/17 22:15:49 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void init_one_line_execution(void)
 	g_data->out_fd = -2;
 	actual_path = NULL;
 
-	command = ft_split("ls", ' ');
+	command = g_data->cmd[0]->data;
 	is_builtin = is_it_builtin(command);
 	if (is_builtin == FALSE)
 		actual_path = find_actual_path(command); //finding and returning the actual path of an executable command

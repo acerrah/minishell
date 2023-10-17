@@ -49,7 +49,7 @@ void loop(void)
 
     while (TRUE)
     {
-        input_str = readline("minishell-0.1$ ");
+        input_str = readline("minishell-0.2$ ");
         if (ft_strtrim(input_str, " ") == NULL)
             continue;
         add_history(input_str);
@@ -61,13 +61,14 @@ void loop(void)
         redirections();
         parser();
         //print command table and fd
+		/*
         for (int i = 0; i < g_data->line; i++)
         {
             for (size_t j = 0; j < g_data->cmd[i]->size; j++)
                 printf("'%s'\n", g_data->cmd[i]->data[j]);
             printf("fd[IN] = %d\n", g_data->fd[IN]->arr[i]);
             printf("fd[OUT] = %d\n", g_data->fd[OUT]->arr[i]);
-        }
+        }*/
         //execute(command);
 		init_one_line_execution();
 		loop_clear(input_str);

@@ -73,6 +73,7 @@ typedef struct s_data
 	int			status;
 	char		**path;
     t_redirections *redirections;
+	int 		pipe_count;
     int line;
 } t_data;
 
@@ -108,5 +109,6 @@ void		loop_clear(char *input_str);
 int			parser();
 int			redirections();
 void		init_one_line_execution(void);
+void take_pipe_count();
 
 #endif

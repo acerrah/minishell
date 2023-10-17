@@ -12,6 +12,22 @@ typedef struct files
     int pipe[2];
 } t_files;*/
 
+void take_pipe_count()
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+    while (i < g_data->lex->size)
+    {
+        if (ft_strtrim(g_data->lex->data[i], " ")[0] == '|')
+            j++;
+        i++;
+    }
+	g_data->pipe_count = j;
+}
+
 //write me a function to take input from user as heredoc it will get input unless the key is given it will return fd of the file
 int heredoc(char *str)
 {
@@ -109,12 +125,8 @@ int parser()
     }
     i = 0;
     j = 0;
-    while (i < g_data->lex->size)
-    {
-        if (ft_strtrim(g_data->lex->data[i], " ")[0] == '|')
-            j++;
-        i++;
-    }
+	take_pipe_count();
+	j = g_data->pipe_count;
     if (j > 0 && g_data->fd[OUT]->size != j + 1)
         dynintarray_push(g_data->fd[OUT], STDOUT);
     g_data->line = j + 1;
