@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_g_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
+/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:52 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/16 15:13:37 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/18 12:15:22 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void handle_g_data(char **env)
     g_data->fd = malloc(sizeof(t_dynintarray *) * 2);
     g_data->fd[IN] = dynintarray_create();
     g_data->fd[OUT] = dynintarray_create();
+	g_data->exit_status = 0;
+	g_data->signal_select = DEFAULT;
 }

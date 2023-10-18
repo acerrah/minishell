@@ -6,13 +6,29 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/16 21:17:35 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/18 13:18:29 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 extern t_data *g_data;
+
+void	redirect_std_files(int in_fd, int out_fd)
+{
+	if (out_fd >= 0)
+	{
+		if (dup2(out_fd, STDOUT_FILENO) == -1)
+			exit(1);
+		close(out_fd);
+	}
+	if (in_fd >= 0)
+	{
+		if (dup2(in_fd, STDIN_FILENO) == -1)
+
+		close(in_fd);
+	}
+}
 
 int is_it_builtin(char **command)
 {

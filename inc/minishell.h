@@ -69,10 +69,10 @@ typedef struct s_data
     t_dynarray	**cmd;
 	int			signal_flag;
 	int			signal_select;
-	int			pid;
+	pid_t			pid;
 	int			in_fd;
 	int			out_fd;
-	int			status;
+	int			exit_status;
 	char		**path;
     t_redirections *redirections;
 	int 		pipe_count;
@@ -111,6 +111,7 @@ void		loop_clear(char *input_str);
 int			parser();
 int			redirections();
 void		init_one_line_execution(void);
-void take_pipe_count();
+void		take_pipe_count();
+void		redirect_std_files(int in_fd, int out_fd);
 
 #endif

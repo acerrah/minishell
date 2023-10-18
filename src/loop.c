@@ -69,7 +69,9 @@ void loop(void)
             printf("fd[IN] = %d\n", g_data->fd[IN]->arr[i]);
             printf("fd[OUT] = %d\n", g_data->fd[OUT]->arr[i]);
         }*/
+		
         //execute(command);
+		init_one_line_execution();
 		loop_clear(input_str);
     }
 }
