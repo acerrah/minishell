@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/18 13:18:29 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/18 14:31:38 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,27 @@ int is_it_builtin(char **command)
 	else if (ft_strcmp(command[0], "cd") == 0)
 		return (TRUE);
 	else if (ft_strcmp(command[0], "env") == 0)
+	{
+		ft_env(command);
 		return (TRUE);
+	}
 	else if (ft_strcmp(command[0], "export") == 0)
+	{
+		ft_export(command);
 		return (TRUE);
+	}
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		return (TRUE);
 	else if (ft_strcmp(command[0], "exit") == 0)
+	{
+		ft_exit(command);
 		return (TRUE);
+	}
 	else if (ft_strcmp(command[0], "unset") == 0)
+	{
+		ft_unset(command);
 		return (TRUE);
+	}
 	else
 		return (FALSE);
 }
@@ -64,8 +76,6 @@ void execute_builtin(char **command)
 		ft_export(command);
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		ft_pwd();
-	else if (ft_strcmp(command[0], "exit") == 0)
-		ft_exit(command);
 	else if (ft_strcmp(command[0], "unset") == 0)
 		ft_unset(command);
 }
