@@ -113,5 +113,6 @@ int			redirections();
 void		init_one_line_execution(void);
 void		take_pipe_count();
 void		redirect_std_files(int in_fd, int out_fd);
+void		ctrl_d(char	*input);
 
 #endif

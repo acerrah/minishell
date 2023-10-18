@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:46:05 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/16 21:22:56 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/18 16:14:24 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ while Ctrl-D is used to indicate the end of input or close stdin in a terminal. 
 
 extern t_data *g_data;
 
+void	ctrl_d(char	*input)
+{
+	if (input ==  NULL)
+	{
+		if (g_data->signal_select != HEREDOC)
+		{
+			printf("exit\n");
+			exit(0);
+		}
+		else
+		{
+			// set a flag that heredoc is finished
+			return ;
+		}
+	}
+}
 
 void sigint_handler(int sig)
 {

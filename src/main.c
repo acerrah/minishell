@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:13:05 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/17 23:01:10 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/18 16:15:19 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int main(int ac, char **av, char **env){
 
     if (ac != 1 || av[1] != NULL || env[0] == NULL)
         return (0);
-
     handle_g_data(env);
 	loop();
     return 0;
