@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/19 14:12:12 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 19:50:42 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,6 @@ void execute_builtin(char **command)
 		ft_echo(command);
 	else if (ft_strcmp(command[0], "cd") == 0)
 		ft_cd(command);
-	else if (ft_strcmp(command[0], "env") == 0)
-		ft_env(command);
-	else if (ft_strcmp(command[0], "export") == 0)
-		ft_export(command);
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(command[0], "unset") == 0)

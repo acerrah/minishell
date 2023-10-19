@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/16 21:57:12 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 20:14:31 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,32 @@ char *format_env(char *command)
 }
 */
 
-void ft_export(char **command)
+
+int	duplicate_check(char *variable)
 {
 	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (variable[j] && variable[j] != '=')
+		j++;
+	while (g_data->env->data[i])
+	{
+		if (ft_strncmp(variable, g_data->env->data[i], j) == 0)
+		{
+			dynarray_remove(g_data->env, i);
+			dynarray_remove(g_data->exp, i);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void ft_export(char **command)
+{
+	int	i;
 
 	i = 1;
 	if (command[i] == 0)
@@ -158,6 +181,14 @@ void ft_export(char **command)
 				printf("bash: export: '%s': not a valid identifier\n", command[i]);
 				i++;
 				continue ;
+			}
+			else if (duplicate_check(command[i]) == 1)
+			{
+				//if variable exist in env,delete it and update it
+				if (command[i][ft_strlen(command[i]) - 1] == '=')
+					dynarray_push(g_data->exp, ft_strjoin("declare -x ", ft_strjoin(command[i], "\"\"")));
+				else
+					dynarray_push(g_data->exp, ft_strjoin("declare -x ", format_exp(command[i])));
 			}
 			else if (command[i][0] != '=')
 			{
