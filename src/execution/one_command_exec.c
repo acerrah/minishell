@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:38:18 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/18 13:17:56 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 14:12:30 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_data *g_data;
 
-void execute_one_line_command(char *actual_path, int is_builtin, char **command)
+void execute_one_command(char *actual_path, int is_builtin, char **command)
 {
 	if (actual_path || is_builtin)
 	{
@@ -22,7 +22,7 @@ void execute_one_line_command(char *actual_path, int is_builtin, char **command)
 		if (g_data->pid == CHILD)
 		{
 			// Set standard input and output files.
-			redirect_std_files(g_data->in_fd, g_data->out_fd);
+			redirect_std_files(g_data->fd[0]->arr[0], g_data->fd[1]->arr[0]);
 			if (is_builtin == TRUE)
 				execute_builtin(command);
 			execve(actual_path, command, g_data->env->data);
@@ -40,22 +40,19 @@ void execute_one_line_command(char *actual_path, int is_builtin, char **command)
 	}
 }
 
-void init_one_line_execution(void)
+void init_one_command_execution(void)
 {
 	char **command;
 	char *actual_path;
 	int	is_builtin;
 
-	g_data->in_fd = -2;
-	g_data->out_fd = -2;
 	actual_path = NULL;
-
 	command = g_data->cmd[0]->data;
 
 	is_builtin = is_it_builtin(command);
 	if (is_builtin == FALSE)
 		actual_path = find_actual_path(command); //finding and returning the actual path of an executable command
 	g_data->signal_select = CHILD;
-	execute_one_line_command(actual_path, is_builtin, command);
+	execute_one_command(actual_path, is_builtin, command);
 	g_data->signal_select = DEFAULT;
 }

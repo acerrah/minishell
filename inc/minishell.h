@@ -110,9 +110,10 @@ void		loop(void);
 void		loop_clear(char *input_str);
 int			parser();
 int			redirections();
-void		init_one_line_execution(void);
+void		init_one_command_execution(void);
 void		take_pipe_count();
 void		redirect_std_files(int in_fd, int out_fd);
 void		ctrl_d(char	*input);
+void		create_pipe_fd(void);
 
 #endif
