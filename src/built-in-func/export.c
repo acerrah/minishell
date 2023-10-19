@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/19 20:14:31 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 20:30:01 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,16 +186,16 @@ void ft_export(char **command)
 			{
 				//if variable exist in env,delete it and update it
 				if (command[i][ft_strlen(command[i]) - 1] == '=')
-					dynarray_push(g_data->exp, ft_strjoin("declare -x ", ft_strjoin(command[i], "\"\"")));
+					dynarray_push(g_data->exp, ft_strjoin(command[i], "\"\""));
 				else
-					dynarray_push(g_data->exp, ft_strjoin("declare -x ", format_exp(command[i])));
+					dynarray_push(g_data->exp, format_exp(command[i]));
 			}
 			else if (command[i][0] != '=')
 			{
 				if (command[i][ft_strlen(command[i]) - 1] == '=')
-					dynarray_push(g_data->exp, ft_strjoin("declare -x ", ft_strjoin(command[i], "\"\"")));
+					dynarray_push(g_data->exp, ft_strjoin(command[i], "\"\""));
 				else
-					dynarray_push(g_data->exp, ft_strjoin("declare -x ", format_exp(command[i])));
+					dynarray_push(g_data->exp, format_exp(command[i]));
 			}
 			// if variable has a value add to env
 			if (int_strchr(command[i], '='))

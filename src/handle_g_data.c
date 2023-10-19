@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:12:52 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/18 12:15:22 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 20:34:52 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void handle_g_data(char **env)
     i = 0;
     while (env[i])
     {
-        dynarray_push(g_data->exp, ft_strjoin("declare -x ", env[i]));
+        dynarray_push(g_data->exp, env[i]);
         i++;
     }
     g_data->lex = dynarray_create();
