@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/20 23:04:30 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/21 00:55:33 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,53 +63,5 @@ void	pipe_redirection(int i)
 		dup2(g_data->fd[1]->arr[i], STDOUT_FILENO);
 }
 
-int is_it_builtin(char **command)
-{
-	if (len_2d(command) == 0)
-		return (FALSE);
-	else if (ft_strcmp(command[0], "env") == 0)
-	{
-		ft_env(command);
-		return (TRUE);
-	}
-	else if (ft_strcmp(command[0], "export") == 0)
-	{
-		ft_export(command);
-		return (TRUE);
-	}
-	else if (ft_strcmp(command[0], "pwd") == 0)
-	{
-		ft_pwd();
-		return (TRUE);
-	}
-	else if (ft_strcmp(command[0], "exit") == 0)
-	{
-		ft_exit(command);
-		return (TRUE);
-	}
 
-	else
-		return (is_it_builtin2(command));
-}
-
-int is_it_builtin2(char **command)
-{
-	if (ft_strcmp(command[0], "echo") == 0)
-	{
-		ft_echo(command);
-		return (TRUE);
-	}
-	else if (ft_strcmp(command[0], "cd") == 0)
-	{
-		ft_cd(command);
-		return (TRUE);
-	}
-	else if (ft_strcmp(command[0], "unset") == 0)
-	{
-		ft_unset(command);
-		return (TRUE);
-	}
-	else
-		return (FALSE);
-}
 

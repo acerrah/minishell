@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:14:42 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/20 23:37:40 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/21 01:05:03 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	execute_multi_command(char **command,int is_builtin, int i, char *actual_pa
 		{
 			pipe_redirection(i);
 			close_pipe_fd();
-			execve(actual_path, command, g_data->env->data);
+			if (is_builtin == TRUE)
+				execute_builtin(command);
+			else
+				execve(actual_path, command, g_data->env->data);
 			exit(1);
 		}
 		else
@@ -63,7 +66,7 @@ void	init_multi_command_execution(void)
 	while (i++ < g_data->pipe_count)
 	{
 		command = g_data->cmd[i]->data;
-		is_builtin = is_it_builtin(command);
+		is_builtin = is_builtin_check(command[0]);
 		if (is_builtin == FALSE)
 			actual_path = find_actual_path(command);
 		execute_multi_command(command, is_builtin, i, actual_path);

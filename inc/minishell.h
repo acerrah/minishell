@@ -118,6 +118,7 @@ void		create_pipe_fd(void);
 int			is_it_builtin2(char **command);
 void		init_multi_command_execution(void);
 void		pipe_redirection(int i);
-
+void		execute_builtin(char **command);
+int			is_builtin_check(char *command);
 
 #endif
