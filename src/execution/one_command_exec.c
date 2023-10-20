@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:38:18 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/19 14:12:30 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/19 23:58:40 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 extern t_data *g_data;
 
-void execute_one_command(char *actual_path, int is_builtin, char **command)
+void execute_one_command(char *actual_path, char **command, int is_builtin)
 {
-	if (actual_path || is_builtin)
+	if (actual_path || is_builtin == TRUE)
 	{
 		g_data->pid = fork();
 		if (g_data->pid == CHILD)
 		{
 			// Set standard input and output files.
 			redirect_std_files(g_data->fd[0]->arr[0], g_data->fd[1]->arr[0]);
-			if (is_builtin == TRUE)
-				execute_builtin(command);
 			execve(actual_path, command, g_data->env->data);
 			exit(1);
 		}
@@ -52,7 +50,6 @@ void init_one_command_execution(void)
 	is_builtin = is_it_builtin(command);
 	if (is_builtin == FALSE)
 		actual_path = find_actual_path(command); //finding and returning the actual path of an executable command
-	g_data->signal_select = CHILD;
-	execute_one_command(actual_path, is_builtin, command);
-	g_data->signal_select = DEFAULT;
+	execute_one_command(actual_path, command, is_builtin);
+
 }

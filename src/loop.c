@@ -72,7 +72,10 @@ void loop(void)
         }
 		*/
         //execute(command);
-		init_one_command_execution();
+		if (g_data->pipe_count == 0)
+			init_one_command_execution();
+		else if (g_data->pipe_count > 0)
+			init_multi_command_execution();
 		loop_clear(input_str);
     }
 }

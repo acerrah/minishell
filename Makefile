@@ -24,7 +24,8 @@ SRCS  = ./src/main.c \
 		./src/execution/one_command_exec.c \
 		./src/signals/signal_handler.c \
 		./src/utils/exec_utils.c \
-		./src/utils/path_utils.c
+		./src/utils/path_utils.c \
+		./src/execution/multi_command_exec.c
 
 all: $(NAME)
 

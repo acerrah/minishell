@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/19 19:50:42 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/20 21:22:40 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,44 @@ void	redirect_std_files(int in_fd, int out_fd)
 		close(in_fd);
 	}
 }
-/*
-void	create_pipe_fd(void)
-{
-	int i;
 
-	i = 0;
-	while (i < g_data->pipe_count)
-	{
-			g_data->fd[i] = malloc(sizeof(int) * 2);
-			if (pipe(g_data->fd[i]) == -1)
-				exit(1);
-			i++;
-	}
+
+void create_pipe_fd(void)
+{
+    int i;
+
+    i = 0;
+    g_data->pipe_fd = malloc(sizeof(int*) * g_data->pipe_count);
+    while (i < g_data->pipe_count)
+    {
+        g_data->pipe_fd[i] = malloc(sizeof(int) * 2);
+        if (pipe(g_data->pipe_fd[i]) == -1)
+            exit(1);
+        i++;
+    }
 }
-*/
+
+void	pipe_redirection(int i)
+{
+	if (i == 0)
+		dup2(g_data->pipe_fd[i][1], STDOUT_FILENO);
+	else if (i == g_data->pipe_count)
+		dup2(g_data->pipe_fd[i - 1][0], STDIN_FILENO);
+	else
+	{
+		dup2(g_data->pipe_fd[i - 1][0], STDIN_FILENO);
+		dup2(g_data->pipe_fd[i][1], STDOUT_FILENO);
+	}
+	if (g_data->fd[0]->arr[i] > 2)
+		dup2(g_data->fd[0]->arr[i], STDIN_FILENO);
+	if (g_data->fd[1]->arr[i] > 2)
+		dup2(g_data->fd[1]->arr[i], STDOUT_FILENO);
+}
+
 int is_it_builtin(char **command)
 {
 	if (len_2d(command) == 0)
 		return (FALSE);
-	if (ft_strcmp(command[0], "echo") == 0)
-		return (TRUE);
-	else if (ft_strcmp(command[0], "cd") == 0)
-		return (TRUE);
 	else if (ft_strcmp(command[0], "env") == 0)
 	{
 		ft_env(command);
@@ -63,10 +78,30 @@ int is_it_builtin(char **command)
 		return (TRUE);
 	}
 	else if (ft_strcmp(command[0], "pwd") == 0)
+	{
+		ft_pwd();
 		return (TRUE);
+	}
 	else if (ft_strcmp(command[0], "exit") == 0)
 	{
 		ft_exit(command);
+		return (TRUE);
+	}
+
+	else
+		return (is_it_builtin2(command));
+}
+
+int is_it_builtin2(char **command)
+{
+	if (ft_strcmp(command[0], "echo") == 0)
+	{
+		ft_echo(command);
+		return (TRUE);
+	}
+	else if (ft_strcmp(command[0], "cd") == 0)
+	{
+		ft_cd(command);
 		return (TRUE);
 	}
 	else if (ft_strcmp(command[0], "unset") == 0)
@@ -76,17 +111,5 @@ int is_it_builtin(char **command)
 	}
 	else
 		return (FALSE);
-}
-
-void execute_builtin(char **command)
-{
-	if (ft_strcmp(command[0], "echo") == 0)
-		ft_echo(command);
-	else if (ft_strcmp(command[0], "cd") == 0)
-		ft_cd(command);
-	else if (ft_strcmp(command[0], "pwd") == 0)
-		ft_pwd();
-	else if (ft_strcmp(command[0], "unset") == 0)
-		ft_unset(command);
 }
 

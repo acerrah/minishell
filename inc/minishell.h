@@ -66,17 +66,18 @@ typedef struct s_data
     t_dynarray		*lex;
     t_dynarray		*lex_parsed;
     t_dynintarray	**fd;
-    t_dynarray	**cmd;
-	int			signal_flag;
-	int			signal_select;
+	int				**pipe_fd;
+    t_dynarray		**cmd;
+	int				signal_flag;
+	int				signal_select;
 	pid_t			pid;
-	int			in_fd;
-	int			out_fd;
-	int			exit_status;
-	char		**path;
+	int				exit_status;
+	char			**path;
     t_redirections *redirections;
-	int 		pipe_count;
-    int line;
+	int 			pipe_count;
+    int				line;
+	int				stdin_flag;
+	int				stdout_flag;
 } t_data;
 
 t_dynarray *dynarray_create();
@@ -104,7 +105,6 @@ void		ft_exit(char **command);
 int			len_2d(char **command);
 int			ft_signal_handler(void);
 int			is_it_builtin(char **command);
-void		execute_builtin(char **command);
 char		*find_actual_path(char **command);
 void		loop(void);
 void		loop_clear(char *input_str);
@@ -115,5 +115,8 @@ void		take_pipe_count();
 void		redirect_std_files(int in_fd, int out_fd);
 void		ctrl_d(char	*input);
 void		create_pipe_fd(void);
+int			is_it_builtin2(char **command);
+void		init_multi_command_execution(void);
+void		pipe_redirection(int i);
 
 #endif
