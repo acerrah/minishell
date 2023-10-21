@@ -61,17 +61,6 @@ void loop(void)
         }
         redirections();
         parser();
-        //print command table and fd
-		/*
-        for (int i = 0; i < g_data->line; i++)
-        {
-            for (size_t j = 0; j < g_data->cmd[i]->size; j++)
-                printf("'%s'\n", g_data->cmd[i]->data[j]);
-            printf("fd[IN] = %d\n", g_data->fd[IN]->arr[i]);
-            printf("fd[OUT] = %d\n", g_data->fd[OUT]->arr[i]);
-        }
-		*/
-        //execute(command);
 		if (g_data->pipe_count == 0)
 			init_one_command_execution();
 		else if (g_data->pipe_count > 0)
