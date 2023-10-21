@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:31:54 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/20 18:22:30 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/21 17:42:26 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ extern t_data *g_data;
 
 int ft_unset(char **command)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+	int	c;
 
 	i = 1;
 	j = 0;
+	c = 0;
 	if (command[i] == 0)
 		printf("unset: not enough arguments\n");
 	while (command[i])
@@ -30,7 +32,15 @@ int ft_unset(char **command)
 			if (ft_strncmp(command[i], g_data->env->data[j], ft_strlen(command[i])) == 0)
 			{
 				dynarray_remove(g_data->env, j);
-				dynarray_remove(g_data->exp, j);
+				while (g_data->exp->data[c])
+				{
+					if (ft_strncmp(command[i], g_data->exp->data[c], ft_strlen(command[i])) == 0)
+					{
+						dynarray_remove(g_data->exp, c);
+						break;
+					}
+					c++;
+				}
 			}
 			j++;
 		}

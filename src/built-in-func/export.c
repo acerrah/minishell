@@ -6,7 +6,7 @@
 /*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/20 00:08:53 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/21 17:42:38 by iremoztimur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ char	*add_quotes(char *str)
 
 void write_exp(void)
 {
-	int i;
+	size_t i;
 
 	i = 0;
-	while (g_data->exp->data[i])
+	while (i < g_data->exp->size)
 	{
 		printf("declare -x %s\n", g_data->exp->data[i]);
 		i++;
@@ -111,34 +111,6 @@ void single_to_double_quote(char *command)
 		return ;
 	}
 }
-
-// Here is to remove double quotes from the command
-/*
-char *format_env(char *command)
-{
-	char **raw_str;
-	char *res;
-	int len;
-	int i;
-
-	i = 0;
-	res = "a";
-	if (ft_strchr(command, '\"') != 0)
-	{
-		raw_str = ft_split(command, '\"');
-		len = len_2d(raw_str);
-		while (i < len)
-		{
-			ft_strjoin(res, raw_str[i]);
-			i++;
-		}
-	}
-	else
-		res = ft_strdup(command);
-	return (res);
-}
-*/
-
 
 int	duplicate_check(char *variable)
 {
