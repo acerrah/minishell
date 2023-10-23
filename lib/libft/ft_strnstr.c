@@ -6,7 +6,7 @@
 /*   By: acerrah <acerrah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:28:43 by acerrah           #+#    #+#             */
-/*   Updated: 2022/10/18 11:28:44 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/22 03:51:20 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	{
 		n = i;
 		flag = 0;
-		while ((*(needle + flag) == *(haystack + n)) && *(needle + flag) != '\0'
+		while ((*(needle + flag) == *(haystack + n))
+			&& *(needle + flag) != '\0'
 			&& n++ < len)
 			flag++;
 		if (flag == needle_len)

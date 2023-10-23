@@ -3,176 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ioztimur <ioztimur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 22:11:47 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/21 17:42:38 by iremoztimur      ###   ########.fr       */
+/*   Created: 2023/10/22 08:23:31 by ioztimur          #+#    #+#             */
+/*   Updated: 2023/10/23 01:53:24 by ioztimur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_data *g_data;
+t_data	*g_data;
 
-int	int_strchr(const char *s, int c)
+void	push_to_exp(char *cmd, int j)
 {
-	int	i;
+	char	*tmp;
 
-	i = 0;
-	if (!s && *s != 0)
-		return (0);
-	while (s[i] != 0)
+	if (cmd[ft_strlen(cmd) - 1] == '=')
 	{
-		if (s[i] == (char)c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*add_quotes(char *str)
-{
-	int i;
-	int len;
-	char *new_str;
-	int j;
-
-	i = 1;
-	j = 0;
-	len = ft_strlen(str);
-	new_str = (char *)malloc(sizeof(char) * len + 3);
-	new_str[0] = '\"';
-	while(str[j])
-	{
-		new_str[i] = str[j];
-		i++;
-		j++;
-	}
-	new_str[len + 1] = '\"';
-	new_str[len + 2] = '\0';
-	free(str);
-	return(new_str);
-}
-
-void write_exp(void)
-{
-	size_t i;
-
-	i = 0;
-	while (i < g_data->exp->size)
-	{
-		printf("declare -x %s\n", g_data->exp->data[i]);
-		i++;
-	}
-}
-
-char *format_exp(char *command)
-{
-	char *variable;
-	char *value;
-	char **str;
-	char *ret;
-
-	str = ft_split(command, '=');
-	variable = ft_strdup(str[0]);
-	if (str[1])
-	{
-		if (str[1][0] != '\"' && str[1][ft_strlen(str[1] - 1)] != '\"')
-			value = add_quotes(ft_strdup(str[1]));
-		else
-			value = ft_strdup(str[1]);
+		tmp = ft_strjoin(cmd, "\"\"");
+		dynarray_push_to(g_data->exp, tmp, j);
+		free(tmp);
 	}
 	else
-		value = ft_strdup("");
-	ret = ft_strjoin(ft_strjoin(variable, "="), value);
-	free(variable);
-	free(value);
-	return (ret);
-}
-
-int syntax_check(char *command)
-{
-	char *variable;
-	if (ft_strchr(command, '=') != 0)
 	{
-		variable = ft_split(command, '=')[0];
-		return (int_strchr(variable, 32));
-	}
-	else
-		return (0);
-}
-
-void single_to_double_quote(char *command)
-{
-	if (command[0] == '\'' && command[ft_strlen(command) - 1] == '\'')
-	{
-		command[0] = '\"';
-		command[ft_strlen(command) - 1] = '\"';
-		return ;
+		tmp = format_exp(cmd);
+		dynarray_push_to(g_data->exp, tmp, j);
+		free(tmp);
 	}
 }
 
-int	duplicate_check(char *variable)
+void	push_in_order(char **cmd, int i)
 {
-	int i;
-	int j;
+	size_t	j;
+	char	*declare;
 
-	i = 0;
 	j = 0;
-	while (variable[j] && variable[j] != '=')
-		j++;
-	while (g_data->env->data[i])
+	while (g_data->exp->size > j)
 	{
-		if (ft_strncmp(variable, g_data->env->data[i], j) == 0)
+		if (ascii_bigger(cmd[i], g_data->exp->data[j]) == 0)
 		{
-			dynarray_remove(g_data->env, i);
-			dynarray_remove(g_data->exp, i);
-			return (1);
+			declare = ft_strdup(cmd[i]);
+			push_to_exp(declare, j);
+			free(declare);
+			break ;
 		}
-		i++;
+		j++;
+		if (g_data->exp->size == j)
+		{
+			declare = ft_strdup(cmd[i]);
+			push_to_exp(declare, j);
+			free(declare);
+			break ;
+		}
 	}
-	return (0);
 }
 
-void ft_export(char **command)
+void	init_export(char **cmd, int size)
 {
 	int	i;
 
 	i = 1;
-	if (command[i] == 0)
-		write_exp();
-	else
+	while (i < size)
 	{
-		while (command[i])
+		single_to_double_quote(cmd[i]);
+		if (cmd[i][0] == '=' || ft_isdigit(cmd[i][0]) || eq_check(cmd[i]))
 		{
-			single_to_double_quote(command[i]);
-			// Here is for syntax check like having digits or '=' before variable name causes an error
-			if (command[i][0] == '=' || ft_isdigit(command[i][0]) ||
-			syntax_check(command[i]))
-			{
-				printf("bash: export: '%s': not a valid identifier\n", command[i]);
-				i++;
-				continue ;
-			}
-			else if (duplicate_check(command[i]) == 1)
-			{
-				//if variable exist in env,delete it and update it
-				if (command[i][ft_strlen(command[i]) - 1] == '=')
-					dynarray_push(g_data->exp, ft_strjoin(command[i], "\"\""));
-				else
-					dynarray_push(g_data->exp, format_exp(command[i]));
-			}
-			else if (command[i][0] != '=')
-			{
-				if (command[i][ft_strlen(command[i]) - 1] == '=')
-					dynarray_push(g_data->exp, ft_strjoin(command[i], "\"\""));
-				else
-					dynarray_push(g_data->exp, format_exp(command[i]));
-			}
-			// if variable has a value add to env
-			if (int_strchr(command[i], '='))
-				dynarray_push(g_data->env, command[i]);
+			printf("bash: export: '%s': not a valid identifier\n", cmd[i]);
+			i++;
+			continue ;
+		}
+		else if (duplicate_check(cmd[i]) == 1)
+			push_in_order(cmd, i);
+		else if (cmd[i][0] != '=')
+			push_in_order(cmd, i);
+		if (int_strchr(cmd[i], '='))
+			dynarray_push(g_data->env, cmd[i]);
+		i++;
+	}
+}
+
+void	ft_export(char **cmd, int size)
+{
+	size_t	i;
+
+	i = 0;
+	if (cmd[1] == 0)
+	{
+		while (i < g_data->exp->size)
+		{
+			printf("declare -x %s\n", g_data->exp->data[i]);
 			i++;
 		}
 	}
+	else
+		init_export(cmd, size);
 }

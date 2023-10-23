@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ioztimur <ioztimur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 21:33:38 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 11:54:18 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/23 04:11:24 by ioztimur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_data *g_data;
+t_data	*g_data;
 
-void update_old_path(void)
+void	update_old_path(void)
 {
-	char *path;
-	char buff[BUFF_SIZE + 1];
+	char	*path;
+	char	buff[BUFF_SIZE + 1];
 
 	path = ft_strjoin("OLDPWD=", getcwd(buff, BUFF_SIZE));
 	dynarray_push(g_data->exp, path);
@@ -25,15 +25,34 @@ void update_old_path(void)
 	free(path);
 }
 
-void ft_cd(char **command)
+int	nemo_find_home(void)
 {
-	int i;
+	size_t	i;
+
+	i = 0;
+	while (i < g_data->env->size)
+	{
+		if (ft_strncmp(g_data->env->data[i], "HOME=", 5) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+void	ft_cd(char **command)
+{
+	int	i;
 
 	i = 1;
 	if (command[i] == 0)
 	{
-		update_old_path();
-		chdir(getenv("HOME"));
+		if (nemo_find_home() != -1)
+		{
+			update_old_path();
+			chdir(g_data->env->data[nemo_find_home()] + 5);
+		}
+		else
+			printf("cd: HOME not set\n");
 	}
 	else
 	{

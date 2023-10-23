@@ -1,4 +1,4 @@
-prefix=/Users/cerrah/Docs/Projects/gitgit/readline
+prefix=/Users/ioztimur/Downloads/sonhal/readline
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

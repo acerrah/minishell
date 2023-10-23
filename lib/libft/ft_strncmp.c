@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acerrah <alierdemcerrah@student.42.fr>     +#+  +:+       +#+        */
+/*   By: acerrah <acerrah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:28:39 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/15 12:09:57 by acerrah          ###   ########.fr       */
+/*   Updated: 2023/10/22 03:51:07 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t len1;
-	size_t len2;
+	size_t	len1;
+	size_t	len2;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);

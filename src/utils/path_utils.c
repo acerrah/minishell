@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ioztimur <ioztimur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:10:02 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/17 22:03:22 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/23 04:06:44 by ioztimur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_data *g_data;
+t_data	*g_data;
 
 static void	find_path(void)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (g_data->env->data[i])
@@ -28,64 +28,78 @@ static void	find_path(void)
 		}
 		i++;
 	}
-
 }
 
-char	*new_str_join(char *s1, char *s2)
+void	free_path(void)
 {
-	char	*back;
-	size_t	total_len;
-
-	if (!s1 || !s2)
-		return (0);
-	total_len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
-	back = malloc(total_len * sizeof(char));
-	if (!back)
-		return (0);
-	ft_strlcpy(back, s1, ft_strlen(s1) + 1);
-	ft_strlcat(back, s2, total_len);
-	free(s1);
-	return (back);
-}
-
-static char	*access_valid_path(char *command)
-{
-	int i;
-	char *actual_path;
+	int	i;
 
 	i = 0;
 	while (g_data->path[i])
 	{
-		actual_path = ft_strdup(g_data->path[i]);
-		actual_path = new_str_join(actual_path, "/");
-		actual_path = new_str_join(actual_path, command);
+		free(g_data->path[i]);
+		i++;
+	}
+	free(g_data->path);
+}
+
+char	*access_valid_path(char *command)
+{
+	int		i;
+	char	*actual_path;
+	char	*tmp;
+
+	i = 0;
+	if (access(command, X_OK) != -1)
+		return (ft_strdup(command));
+	while (g_data->path[i])
+	{
+		tmp = ft_strjoin(g_data->path[i], "/");
+		actual_path = ft_strjoin(tmp, command);
+		free(tmp);
 		if (access(actual_path, F_OK) != -1)
+		{
+			free_path();
 			return (actual_path);
+		}
 		free(actual_path);
 		i++;
 	}
+	free_path();
 	return (NULL);
 }
 
-
-
 char	*find_actual_path(char **command)
 {
-	char *actual_path;
+	char	*actual_path;
 
 	find_path();
-	//make error checks
+	if (g_data->path == NULL)
+		return (NULL);
 	if (command[0] == NULL)
-		ft_strdup("");
+		return (ft_strdup(""));
 	if (command == NULL)
 		return (NULL);
-	// if it is absolute path return it
 	if (command[0][0] == '/' && access(command[0], F_OK) != -1)
-		return (command[0]);
+		return (ft_strdup(command[0]));
 	actual_path = access_valid_path(command[0]);
 	if (actual_path)
 		return (actual_path);
-	// free path to prevent leaks
 	return (NULL);
+}
 
+int	int_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!s && *s != 0)
+		return (0);
+	while (s[i] != 0)
+	{
+		if (s[i] == (char)c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -40,11 +40,9 @@ SRC = 		ft_isalpha.c \
 			ft_lstdelone.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
-			ft_lstmap.c
+			ft_lstmap.c 
 
-SRCS = ${addprefix ./libft/,${SRC}} \
-		gnl/get_next_line.c \
-		gnl/get_next_line_utils.c
+SRCS = ${addprefix ./libft/,${SRC}}
 
 OBJS = ${SRCS:.c=.o}
 NAME = lib.a

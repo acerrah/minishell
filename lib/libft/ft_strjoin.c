@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: acerrah <acerrah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:28:21 by acerrah           #+#    #+#             */
-/*   Updated: 2023/10/17 10:34:06 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/22 14:51:35 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(back, s2, total_len);
 	return (back);
 }
-

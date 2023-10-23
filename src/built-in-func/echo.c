@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: acerrah <acerrah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:50:11 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/13 09:51:09 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/22 03:06:58 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static int check_flag(char *str)
+static int	check_flag(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str || str[i] != '-')
@@ -27,22 +27,22 @@ static int check_flag(char *str)
 	return (1);
 }
 
-int ft_echo(char **av)
+int	ft_echo(char **av, int size)
 {
 	int	i;
 	int	n_flag;
 
 	i = 1;
 	n_flag = 1;
-	while (av[i] && check_flag(av[i]))
+	while (i < size && check_flag(av[i]))
 	{
 		n_flag = 0;
 		i++;
 	}
-	while (av[i])
+	while (i < size)
 	{
 		ft_putstr_fd(av[i], 1);
-		if (av[i + 1] && av[i + 1][0] != '\0')
+		if (i + 1 < size && av[i + 1][0] != '\0')
 			write(1, " ", 1);
 		i++;
 	}

@@ -3,44 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ioztimur <ioztimur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 10:31:54 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/21 17:42:26 by iremoztimur      ###   ########.fr       */
+/*   Created: 2023/10/22 03:36:54 by ioztimur          #+#    #+#             */
+/*   Updated: 2023/10/23 03:51:08 by ioztimur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_data *g_data;
+t_data	*g_data;
 
-int ft_unset(char **command)
+void	remove_from_env(char *cmd)
 {
-	int	i;
-	int	j;
-	int	c;
+	size_t	c;
+	char	*tmp;
+
+	c = 0;
+	tmp = ft_strjoin(cmd, "=");
+	while (c < g_data->env->size)
+	{
+		if (ft_strncmp(tmp, g_data->env->data[c], ft_strlen(tmp)) == 0)
+		{
+			dynarray_remove(g_data->env, c);
+			free(tmp);
+			break ;
+		}
+		c++;
+	}
+}
+
+int	ft_unset(char **command, int size)
+{
+	int		i;
+	size_t	j;
 
 	i = 1;
 	j = 0;
-	c = 0;
 	if (command[i] == 0)
 		printf("unset: not enough arguments\n");
-	while (command[i])
+	while (i < size)
 	{
-		while (g_data->env->data[j])
+		while (j < g_data->exp->size)
 		{
-			if (ft_strncmp(command[i], g_data->env->data[j], ft_strlen(command[i])) == 0)
+			if (ft_strncmp(command[i], g_data->exp->data[j], \
+			ft_strlen(command[i])) == 0)
 			{
-				dynarray_remove(g_data->env, j);
-				while (g_data->exp->data[c])
-				{
-					if (ft_strncmp(command[i], g_data->exp->data[c], ft_strlen(command[i])) == 0)
-					{
-						dynarray_remove(g_data->exp, c);
-						break;
-					}
-					c++;
-				}
+				dynarray_remove(g_data->exp, j);
+				remove_from_env(command[i]);
+				break ;
 			}
 			j++;
 		}

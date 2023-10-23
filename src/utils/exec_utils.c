@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremoztimur <iremoztimur@student.42.fr>    +#+  +:+       +#+        */
+/*   By: acerrah <acerrah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 11:47:06 by iremoztimur       #+#    #+#             */
-/*   Updated: 2023/10/21 00:55:33 by iremoztimur      ###   ########.fr       */
+/*   Updated: 2023/10/22 14:51:35 by acerrah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_data *g_data;
+t_data	*g_data;
 
 void	redirect_std_files(int in_fd, int out_fd)
 {
@@ -30,20 +30,19 @@ void	redirect_std_files(int in_fd, int out_fd)
 	}
 }
 
-
-void create_pipe_fd(void)
+void	create_pipe_fd(void)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    g_data->pipe_fd = malloc(sizeof(int*) * g_data->pipe_count);
-    while (i < g_data->pipe_count)
-    {
-        g_data->pipe_fd[i] = malloc(sizeof(int) * 2);
-        if (pipe(g_data->pipe_fd[i]) == -1)
-            exit(1);
-        i++;
-    }
+	i = 0;
+	g_data->pipe_fd = malloc(sizeof(int *) * g_data->pipe_count);
+	while (i < g_data->pipe_count)
+	{
+		g_data->pipe_fd[i] = malloc(sizeof(int) * 2);
+		if (pipe(g_data->pipe_fd[i]) == -1)
+			exit(1);
+		i++;
+	}
 }
 
 void	pipe_redirection(int i)
@@ -62,6 +61,3 @@ void	pipe_redirection(int i)
 	if (g_data->fd[1]->arr[i] > 2)
 		dup2(g_data->fd[1]->arr[i], STDOUT_FILENO);
 }
-
-
-
